@@ -177,7 +177,7 @@ namespace ElectronicObserver.Observer
 
 				ProxyStarted();
 
-				Utility.Logger.Add( 2, string.Format( LoggerRes.APIObserverStarted, portID ) );
+				Utility.Logger.Add( 1, string.Format( LoggerRes.APIObserverStarted, portID ) );
 
 			}
 			catch (Exception ex)
@@ -200,7 +200,7 @@ namespace ElectronicObserver.Observer
 
 			HttpProxy.Shutdown();
 
-			Utility.Logger.Add( 2, LoggerRes.APIObserverStopped );
+			Utility.Logger.Add( 1, LoggerRes.APIObserverStopped );
 		}
 
 

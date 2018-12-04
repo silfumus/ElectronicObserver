@@ -150,8 +150,8 @@ namespace ElectronicObserver.Data.Battle.Detail
 
 			if (Battle.IsPractice)
 				builder.AppendFormat("{0}{1} → {2}{3}",
-					Attacker == null ? "" : AttackerIndex.IsFriend ? "自軍 " : "敵軍 ", GetAttackerName(),
-					DefenderIndex.IsFriend ? "自軍 " : "敵軍 ", GetDefenderName()
+					Attacker == null ? "" : AttackerIndex.IsFriend ? "Friendly " : "Enemy ", GetAttackerName(),
+					DefenderIndex.IsFriend ? "Friendly " : "Enemy ", GetDefenderName()
 					).AppendLine();
 			else
 				builder.AppendFormat("{0} → {1}", GetAttackerName(), GetDefenderName()).AppendLine();
@@ -207,10 +207,7 @@ namespace ElectronicObserver.Data.Battle.Detail
 
 			// damage control
 			if (beforeHP > 0 && afterHP <= 0 && DefenderIndex.IsFriend && !Battle.IsPractice && !Battle.IsBaseAirRaid)
-			{
-				// 友軍艦隊時は常に beforeHP == 0 になるので、ここには来ないはず
-				// 暫定対策でしかないのでできればまともにしたい
-
+			{				
 				var defender = (DefenderIndex.Side == BattleSides.FriendEscort ? Battle.Initial.FriendFleetEscort : Battle.Initial.FriendFleet)
 					?.MembersInstance?.ElementAtOrDefault(DefenderIndex.Index);
 				if (defender != null)

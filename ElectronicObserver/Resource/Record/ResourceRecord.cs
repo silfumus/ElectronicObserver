@@ -239,7 +239,7 @@ namespace ElectronicObserver.Resource.Record
 		public ResourceElement GetRecordPrevious()
 		{
 
-			DateTime now = DateTime.Now;
+			DateTime now = DateTime.UtcNow + new TimeSpan(9, 0, 0);
 			DateTime target;
 			if (now.TimeOfDay.Hours < 2)
 			{
@@ -263,7 +263,7 @@ namespace ElectronicObserver.Resource.Record
 		public ResourceElement GetRecordDay()
 		{
 
-			DateTime now = DateTime.Now;
+			DateTime now = DateTime.UtcNow + new TimeSpan(9, 0, 0);
 			DateTime target;
 			if (now.TimeOfDay.Hours < 2)
 			{
@@ -282,7 +282,7 @@ namespace ElectronicObserver.Resource.Record
 		/// </summary>
 		public ResourceElement GetRecordMonth()
 		{
-			DateTime now = DateTime.Now;
+			DateTime now = DateTime.UtcNow + new TimeSpan(9, 0, 0);
 
 			return GetRecord(new DateTime(now.Year, now.Month, 1));
 		}

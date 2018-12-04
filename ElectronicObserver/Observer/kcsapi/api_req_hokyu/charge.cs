@@ -45,7 +45,7 @@ namespace ElectronicObserver.Observer.kcsapi.api_req_hokyu
 			material[3] -= db.Material.Bauxite;
 
 			{
-				var sb = new StringBuilder( "Ships resupplied. cost: " );
+				var sb = new StringBuilder( "Ships resupplied. Cost: " );
 
 				for ( int i = 0; i < 4; i++ ) {
 					if ( material[i] > 0 ) {

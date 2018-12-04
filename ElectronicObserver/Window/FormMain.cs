@@ -174,8 +174,10 @@ namespace ElectronicObserver.Window
 			StripMenu_Tool_FleetImageGenerator.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormFleetImageGenerator];
 			StripMenu_Tool_BaseAirCorpsSimulation.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormBaseAirCorps];
 			StripMenu_Tool_ExpChecker.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormExpChecker];
+		    StripMenu_Tool_KancolleProgress.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormEquipmentList];
 
-			StripMenu_Help_Help.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormInformation];
+
+            StripMenu_Help_Help.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.FormInformation];
 			StripMenu_Help_Version.Image = ResourceManager.Instance.Icons.Images[(int)ResourceManager.IconContent.AppIcon];
 			#endregion
 
@@ -219,6 +221,8 @@ namespace ElectronicObserver.Window
 
 
 			SoftwareInformation.CheckUpdate();
+			CancellationTokenSource cts = new CancellationTokenSource();
+			Task.Run( async () => await SoftwareUpdater.PeriodicUpdateCheckAsync(cts.Token));
 
 			// デバッグ: 開始時にAPIリストを読み込む
 			if (Configuration.Config.Debug.LoadAPIListOnLoad)
@@ -337,7 +341,11 @@ namespace ElectronicObserver.Window
 				_volumeUpdateState = -1;
 		}
 
-
+		public void Update_Available(string newVersion)
+		{
+			StripMenu_Update.Visible = true;
+			StripMenu_Update.Text = string.Format("Electronic Observer v{0} is available!", newVersion);
+		}
 
 
 
@@ -398,47 +406,37 @@ namespace ElectronicObserver.Window
 						maintTimer = maintDate - now;
 					}
 
-					string maintState;
-					switch (SoftwareUpdater.MaintState)
-					{
-						default:
-							maintState = string.Empty;
-							break;
-						case 1:
-							if (maintDate > now)
-							{
-								maintState = string.Format("Event starts in: {0:D2}:{1:D2}:{2:D2}",
-									(int)maintTimer.TotalHours, maintTimer.Minutes, maintTimer.Seconds);
-							}
-							else
-								maintState = "Event has started!";
-							break;
-						case 2:
-							if (maintDate > now)
-							{
-								maintState = string.Format("Event ends in: {0:D2}:{1:D2}:{2:D2}",
-									(int) maintTimer.TotalHours, maintTimer.Minutes, maintTimer.Seconds);
-							}
-							else
-								maintState = "Event period has ended.";
-							break;
-						case 3:
-							if (maintDate > now)
-							{
-								maintState = string.Format("Next maintenance: {0:D2}:{1:D2}:{2:D2}",
-									(int)maintTimer.TotalHours, maintTimer.Minutes, maintTimer.Seconds);
-							}
-							else
-								maintState = "Maintenance has started.";
-							break;
-					}
+				    string maintState, message;
+                    switch (SoftwareUpdater.MaintState)
+                    {
+                        case 1:
+                            message = maintDate > now ? "Event starts in" : "Event has started!";
+                            break;
+                        case 2:
+                            message = maintDate > now ? "Event ends in" : "Event period has ended.";
+                            break;
+                        case 3:
+                            message = maintDate > now ? "Maintenance starts in" : "Maintenance has started.";
+                            break;
+                        default:
+                            message = string.Empty;
+                            break;
+                    }
 
-					var resetMsg = string.Format( "Next PVP Reset: {0:D2}:{1:D2}:{2:D2}\r\n" +
-					                                 "Next Quest Reset: {3:D2}:{4:D2}:{5:D2}\r\n" +
-													 "{6}",
-						(int)pvpTimer.TotalHours, pvpTimer.Minutes, pvpTimer.Seconds,
-						(int)questTimer.TotalHours, questTimer.Minutes, questTimer.Seconds,
-						maintState);
+                    if (maintDate > now)
+                    {
+                        var hours = $"{maintTimer.Days}d {maintTimer.Hours}h";
+				        if ((int)maintTimer.TotalHours < 24)
+				            hours = $"{maintTimer.Hours}h";
+				        maintState = $"{message} {hours} {maintTimer.Minutes}m {maintTimer.Seconds}s";
+                    }
+				    else
+				        maintState = message;
+
+                    var resetMsg =
+                        $"Next PVP reset: {(int) pvpTimer.TotalHours:D2}:{pvpTimer.Minutes:D2}:{pvpTimer.Seconds:D2}\r\n" +
+                        $"Next Quest reset: {(int) questTimer.TotalHours:D2}:{questTimer.Minutes:D2}:{questTimer.Seconds:D2}\r\n" +
+                        $"{maintState}";
 
 					StripStatus_Clock.Text = now.ToString( "HH\\:mm\\:ss" );
 					StripStatus_Clock.ToolTipText = now.ToString( "yyyy\\/MM\\/dd (ddd)\r\n" ) + resetMsg;
@@ -470,13 +468,13 @@ namespace ElectronicObserver.Window
 
 					}
 					break;
-			}
+            }
 
 
-			// WMP コントロールによって音量が勝手に変えられてしまうため、前回終了時の音量の再設定を試みる。
-			// 10回試行してダメなら諦める(例外によるラグを防ぐため)
-			// 起動直後にやらないのはちょっと待たないと音量設定が有効にならないから
-			if (_volumeUpdateState != -1 && _volumeUpdateState < 10 && Utility.Configuration.Config.Control.UseSystemVolume)
+            // WMP コントロールによって音量が勝手に変えられてしまうため、前回終了時の音量の再設定を試みる。
+            // 10回試行してダメなら諦める(例外によるラグを防ぐため)
+            // 起動直後にやらないのはちょっと待たないと音量設定が有効にならないから
+            if (_volumeUpdateState != -1 && _volumeUpdateState < 10 && Utility.Configuration.Config.Control.UseSystemVolume)
 			{
 
 				try
@@ -502,12 +500,12 @@ namespace ElectronicObserver.Window
 				}
 			}
 
-		}
+        }
 
 
 
 
-		private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
 		{
 
 			if ( Utility.Configuration.Config.Life.ConfirmOnClosing ) {
@@ -707,7 +705,7 @@ namespace ElectronicObserver.Window
 					LoadSubWindowsLayout(archive.GetEntry("SubWindowLayout.xml").Open());
 				}
 
-				Utility.Logger.Add(2, "Successfully loaded window layout from " + path);
+				Utility.Logger.Add(1, "Successfully loaded window layout from " + path);
 
 			}
 			catch (FileNotFoundException)
@@ -766,7 +764,7 @@ namespace ElectronicObserver.Window
 				}
 
 
-				Utility.Logger.Add( 2, string.Format(Resources.LayoutSaved, path) );
+				Utility.Logger.Add( 1, string.Format(Resources.LayoutSaved, path) );
 
 			}
 			catch (Exception ex)
@@ -1531,9 +1529,12 @@ namespace ElectronicObserver.Window
 			new Dialog.DialogExpChecker().Show(this);
 		}
 
+        private void StripMenu_Tool_KancolleProgress_Click(object sender, EventArgs e)
+        {
+            new Dialog.DialogKancolleProgress().Show(this);
+        }
 
-
-		private void CallPumpkinHead(string apiname, dynamic data)
+        private void CallPumpkinHead(string apiname, dynamic data)
 		{
 			new DialogHalloween().Show(this);
 			APIObserver.Instance.APIList["api_port/port"].ResponseReceived -= CallPumpkinHead;
@@ -1684,8 +1685,8 @@ namespace ElectronicObserver.Window
 
 
 
-		#endregion
+        #endregion
 
 
-	}
+    }
 }

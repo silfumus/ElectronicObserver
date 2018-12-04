@@ -40,11 +40,14 @@ namespace ElectronicObserver.Window
 		private readonly Color CellColorGreen = Color.FromArgb(0xBB, 0xFF, 0xBB);
 		private readonly Color CellColorGray = Color.FromArgb(0xBB, 0xBB, 0xBB);
 		private readonly Color CellColorCherry = Color.FromArgb(0xFF, 0xDD, 0xDD);
+	    private readonly Color CellColorBlue = Color.FromArgb(173, 216, 230);
+	    private readonly Color CellColorPurple = Color.FromArgb(156, 143, 238);
+	    private readonly Color CellColorCyan = Color.FromArgb(224, 255, 255);
 
-		//セルスタイル
-		private DataGridViewCellStyle CSDefaultLeft, CSDefaultCenter, CSDefaultRight,
+        //セルスタイル
+        private DataGridViewCellStyle CSDefaultLeft, CSDefaultCenter, CSDefaultRight,
 			CSRedRight, CSOrangeRight, CSYellowRight, CSGreenRight, CSGrayRight, CSCherryRight,
-			CSIsLocked;
+            CSBlueRight, CSPurpleRight, CSCyanRight, CSIsLocked;
 
 		/// <summary>選択中のタブ</summary>
 		private ImageLabel SelectedTab = null;
@@ -120,7 +123,19 @@ namespace ElectronicObserver.Window
 			CSCherryRight.BackColor =
 			CSCherryRight.SelectionBackColor = CellColorCherry;
 
-			CSIsLocked = new DataGridViewCellStyle(CSDefaultCenter);
+            CSBlueRight = new DataGridViewCellStyle(CSDefaultRight);
+            CSBlueRight.BackColor =
+            CSBlueRight.SelectionBackColor = CellColorBlue;
+
+		    CSPurpleRight = new DataGridViewCellStyle(CSDefaultRight);
+		    CSPurpleRight.BackColor =
+		        CSPurpleRight.SelectionBackColor = CellColorPurple;
+
+		    CSCyanRight = new DataGridViewCellStyle(CSDefaultRight);
+		    CSCyanRight.BackColor =
+		        CSCyanRight.SelectionBackColor = CellColorCyan;
+
+            CSIsLocked = new DataGridViewCellStyle(CSDefaultCenter);
 			CSIsLocked.ForeColor =
 			CSIsLocked.SelectionForeColor = Color.FromArgb(0xFF, 0x88, 0x88);
 
@@ -465,13 +480,27 @@ namespace ElectronicObserver.Window
 
 				row.Cells[ShipView_RepairTime.Index].Style = cs;
 			}
-			row.Cells[ShipView_FirepowerRemain.Index].Style = ship.FirepowerRemain == 0 ? CSGrayRight : CSDefaultRight;
-			row.Cells[ShipView_TorpedoRemain.Index].Style = ship.TorpedoRemain == 0 ? CSGrayRight : CSDefaultRight;
-			row.Cells[ShipView_AARemain.Index].Style = ship.AARemain == 0 ? CSGrayRight : CSDefaultRight;
-			row.Cells[ShipView_ArmorRemain.Index].Style = ship.ArmorRemain == 0 ? CSGrayRight : CSDefaultRight;
-			row.Cells[ShipView_LuckRemain.Index].Style = ship.LuckRemain == 0 ? CSGrayRight : CSDefaultRight;
+            row.Cells[ShipView_Firepower.Index].Style = row.Cells[ShipView_FirepowerTotal.Index].Style = CSRedRight;
+            row.Cells[ShipView_FirepowerRemain.Index].Style = ship.FirepowerRemain == 0 ? CSRedRight : CSDefaultRight;
 
-			row.Cells[ShipView_Locked.Index].Style = ship.IsLocked ? CSIsLocked : CSDefaultCenter;
+            row.Cells[ShipView_Torpedo.Index].Style = row.Cells[ShipView_TorpedoTotal.Index].Style = ship.TorpedoTotal > 0 ? CSBlueRight : CSDefaultRight;
+            row.Cells[ShipView_TorpedoRemain.Index].Style = ship.TorpedoTotal > 0 && ship.TorpedoRemain == 0 ? CSBlueRight : CSDefaultRight;
+
+            row.Cells[ShipView_AA.Index].Style = row.Cells[ShipView_AATotal.Index].Style = ship.AATotal > 0 ? CSOrangeRight : CSDefaultRight;
+            row.Cells[ShipView_AARemain.Index].Style = ship.AATotal > 0 && ship.AARemain == 0 ? CSOrangeRight : CSDefaultRight;
+
+            row.Cells[ShipView_Armor.Index].Style = row.Cells[ShipView_ArmorTotal.Index].Style = CSYellowRight;
+            row.Cells[ShipView_ArmorRemain.Index].Style = ship.ArmorRemain == 0 ? CSYellowRight : CSDefaultRight;
+
+            row.Cells[ShipView_Luck.Index].Style = row.Cells[ShipView_LuckTotal.Index].Style = CSGreenRight;
+            row.Cells[ShipView_LuckRemain.Index].Style = ship.LuckRemain == 0 ? CSGreenRight : CSDefaultRight;
+
+		    row.Cells[ShipView_ASW.Index].Style = row.Cells[ShipView_ASWTotal.Index].Style = ship.ASWTotal > 0 ? CSPurpleRight : CSDefaultRight;
+		    row.Cells[ShipView_LOS.Index].Style = row.Cells[ShipView_LOSTotal.Index].Style = CSCyanRight;
+		    row.Cells[ShipView_Evasion.Index].Style = row.Cells[ShipView_EvasionTotal.Index].Style = CSRedRight;
+
+
+            row.Cells[ShipView_Locked.Index].Style = ship.IsLocked ? CSIsLocked : CSDefaultCenter;
 
 			return row;
 		}

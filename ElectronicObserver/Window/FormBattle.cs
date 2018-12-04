@@ -596,9 +596,9 @@ namespace ElectronicObserver.Window
 				else
 					label.ForeColor = Utility.Configuration.Config.UI.ForeColor;
 
-                label.ImageAlign = ContentAlignment.MiddleCenter;
-                label.ImageIndex = -1;
-            }
+				label.ImageAlign = ContentAlignment.MiddleCenter;
+				label.ImageIndex = -1;
+			}
 
 			void ClearAACutinLabel()
 			{
@@ -1121,7 +1121,7 @@ namespace ElectronicObserver.Window
 				{
 					ShipData ship = fleet.MembersInstance[index];
 
-					AirStage1Friend.Text = "#" + ( index + 1 );
+					AirStage1Friend.Text = "#" + (index + (pd.IsFriendEscort ? 6 : 0) + 1);
 					AirStage1Friend.ForeColor = Utility.Configuration.Config.UI.ForeColor;
 					AirStage1Friend.ImageAlign = ContentAlignment.MiddleLeft;
 					AirStage1Friend.ImageIndex = (int)ResourceManager.EquipmentContent.Searchlight;
@@ -1134,8 +1134,9 @@ namespace ElectronicObserver.Window
 			//敵探照灯判定
 			{
 				int index = pd.SearchlightIndexEnemy;
-				if ( index != -1 ) {
-					AirStage1Enemy.Text = "#" + ( index + 1 );
+				if (index != -1)
+				{
+					AirStage1Enemy.Text = "#" + (index + (pd.IsEnemyEscort ? 6 : 0) + 1);
 					AirStage1Enemy.ForeColor = Utility.Configuration.Config.UI.ForeColor;
 					AirStage1Enemy.ImageAlign = ContentAlignment.MiddleLeft;
 					AirStage1Enemy.ImageIndex = (int)ResourceManager.EquipmentContent.Searchlight;

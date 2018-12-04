@@ -228,6 +228,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConfigRes.resx</DependentUpon>
     </Compile>
+    <Compile Include="Window\Dialog\DialogKancolleProgress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Window\Dialog\DialogKancolleProgress.Designer.cs">
+      <DependentUpon>DialogKancolleProgress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Window\Dialog\EncycloRes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -758,6 +764,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Window\Dialog\DialogDropRecordViewer.en.resx">
       <DependentUpon>DialogDropRecordViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Window\Dialog\DialogKancolleProgress.resx">
+      <DependentUpon>DialogKancolleProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Window\Dialog\EncycloRes.en.resx">
       <SubType>Designer</SubType>

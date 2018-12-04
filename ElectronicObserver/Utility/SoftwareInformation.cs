@@ -31,20 +31,20 @@ namespace ElectronicObserver.Utility
 		/// <summary>
 		/// バージョン(日本語, ソフトウェア名を含みます)
 		/// </summary>
-		public static string VersionJapanese => SoftwareNameJapanese + "四〇型改";
+		public static string VersionJapanese => SoftwareNameJapanese + "四〇型改二";
 
 
 		/// <summary>
 		/// バージョン(英語)
 		/// </summary>
-		public static string VersionEnglish => "4.0.1";
+		public static string VersionEnglish => "4.0.2";
 
 
 
 		/// <summary>
 		/// 更新日時
 		/// </summary>
-		public static DateTime UpdateTime => DateTimeHelper.CSVStringToTime("2018/09/08 01:00:00");
+		public static DateTime UpdateTime => DateTimeHelper.CSVStringToTime("2018/09/17 10:00:00");
 
 
 
@@ -103,7 +103,7 @@ namespace ElectronicObserver.Utility
 				{
 
 					Utility.Logger.Add(3, Resources.NewVersionFound + version);
-					SoftwareUpdater.UpdateSoftware();
+					Task.Run(() => SoftwareUpdater.UpdateSoftware());
 
 					var result = System.Windows.Forms.MessageBox.Show(
 						string.Format(Resources.AskForUpdate,
@@ -129,7 +129,7 @@ namespace ElectronicObserver.Utility
 				else
 				{
 
-					Utility.Logger.Add(2, "You are currently using the latest version (" + date.ToString("yyyy/MM/dd") + " release).");
+					Utility.Logger.Add(1, "You are currently using the latest version (" + date.ToString("yyyy/MM/dd") + " release).");
 
 				}
 

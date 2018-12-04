@@ -1854,10 +1854,10 @@ namespace ElectronicObserver.Utility
 				json = DynamicJson.Parse( sb.ToString() );
 			}
 			catch (FileNotFoundException) {
-				Logger.Add( 2, @"Settings\ColorScheme.json not found." );
+				Logger.Add( 1, @"Settings\ColorScheme.json not found." );
 			}
 			catch {
-				Logger.Add( 2, @"Failed to read Settings\ColorScheme.json." );
+				Logger.Add( 1, @"Failed to read Settings\ColorScheme.json." );
 			}
 			int themeId = Config.UI.ThemeID;
 			if (!json.IsDefined( themeId )) {
@@ -1865,7 +1865,7 @@ namespace ElectronicObserver.Utility
 				Logger.Add( 2, "Failed to find selected ThemeID" );
 			}
 			ThemeStyle = json[themeId];
-			Logger.Add( 2, "Color theme loaded: " + ThemeStyle["name"] );
+			Logger.Add( 1, "Color theme loaded: " + ThemeStyle["name"] );
 			// 定义基本颜色
 			Config.UI.Color_Red = ThemeColor( "basicColors", "red" );
 			Config.UI.Color_Orange = ThemeColor( "basicColors", "orange" );

@@ -2,27 +2,27 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using Codeplex.Data;
 
 namespace ElectronicObserver.Utility
 {
 	public class DynamicTranslator
-    {
-        private XDocument _shipsXml;
-        private XDocument _shipTypesXml;
-        private XDocument _equipmentXml;
-        private XDocument _equipTypesXml;
-        private XDocument _operationsXml;
-        private XDocument _questsXml;
-        private XDocument _expeditionsXml;
-	    private readonly string _folder = SoftwareUpdater.TranslationFolder;
+	{
+		private readonly string workingDirectory = SoftwareUpdater.TranslationFolder;
+
+		private XDocument shipsXml;
+        private XDocument shipTypesXml;
+        private XDocument equipmentXml;
+        private XDocument equipTypesXml;
+        private XDocument operationsXml;
+        private XDocument questsXml;
+        private XDocument expeditionsXml;
 
 		internal DynamicTranslator()
 		{
 			CheckUpdate();
-		    //LoadFile();
+		    LoadFile();
 
 		}
 
@@ -30,48 +30,13 @@ namespace ElectronicObserver.Utility
         {
             try
             {
-                if (File.Exists(_folder + "\\Ships.xml")) _shipsXml = XDocument.Load(_folder + "\\Ships.xml");
-                if (File.Exists(_folder + "\\ShipTypes.xml")) _shipTypesXml = XDocument.Load(_folder + "\\ShipTypes.xml");
-                if (File.Exists(_folder + "\\Equipment.xml")) _equipmentXml = XDocument.Load(_folder + "\\Equipment.xml");
-                if (File.Exists(_folder + "\\EquipmentTypes.xml")) _equipTypesXml = XDocument.Load(_folder + "\\EquipmentTypes.xml");
-                if (File.Exists(_folder + "\\Operations.xml")) _operationsXml = XDocument.Load(_folder + "\\Operations.xml");
-                if (File.Exists(_folder + "\\Quests.xml")) _questsXml = XDocument.Load(_folder + "\\Quests.xml");
-                if (File.Exists(_folder + "\\Expeditions.xml")) _expeditionsXml = XDocument.Load(_folder + "\\Expeditions.xml");
-            }
-            catch (Exception ex)
-            {
-                Logger.Add(3, "Could not load translation file: " + ex.Message);
-            }
-        }
-
-        private void LoadFile(TranslationFile filename)
-        {
-            try
-            {
-                switch (filename)
-                {
-                    case TranslationFile.Equipment:
-                        _equipmentXml = XDocument.Load(_folder + "\\Equipment.xml");
-                        break;
-                    case TranslationFile.EquipmentTypes:
-                        _equipTypesXml = XDocument.Load(_folder + "\\EquipmentTypes.xml");
-                        break;
-                    case TranslationFile.Expeditions:
-                        _expeditionsXml = XDocument.Load(_folder + "\\Expeditions.xml");
-                        break;
-                    case TranslationFile.Operations:
-                        _operationsXml = XDocument.Load(_folder + "\\Operations.xml");
-                        break;
-                    case TranslationFile.Quests:
-                        _questsXml = XDocument.Load(_folder + "\\Quests.xml");
-                        break;
-                    case TranslationFile.Ships:
-                        _shipsXml = XDocument.Load(_folder + "\\Ships.xml");
-                        break;
-                    case TranslationFile.ShipTypes:
-                        _shipTypesXml = XDocument.Load(_folder + "\\ShipTypes.xml");
-                        break;
-                }
+                if (File.Exists(workingDirectory + "\\Ships.xml")) shipsXml = XDocument.Load(workingDirectory + "\\Ships.xml");
+                if (File.Exists(workingDirectory + "\\ShipTypes.xml")) shipTypesXml = XDocument.Load(workingDirectory + "\\ShipTypes.xml");
+                if (File.Exists(workingDirectory + "\\Equipment.xml")) equipmentXml = XDocument.Load(workingDirectory + "\\Equipment.xml");
+                if (File.Exists(workingDirectory + "\\EquipmentTypes.xml")) equipTypesXml = XDocument.Load(workingDirectory + "\\EquipmentTypes.xml");
+                if (File.Exists(workingDirectory + "\\Operations.xml")) operationsXml = XDocument.Load(workingDirectory + "\\Operations.xml");
+                if (File.Exists(workingDirectory + "\\Quests.xml")) questsXml = XDocument.Load(workingDirectory + "\\Quests.xml");
+                if (File.Exists(workingDirectory + "\\Expeditions.xml")) expeditionsXml = XDocument.Load(workingDirectory + "\\Expeditions.xml");
             }
             catch (Exception ex)
             {
@@ -81,28 +46,10 @@ namespace ElectronicObserver.Utility
 
         private void CheckUpdate()
 	    {
-			if (!Directory.Exists(_folder))
-				Directory.CreateDirectory(_folder);
+			if (!Directory.Exists(workingDirectory))
+				Directory.CreateDirectory(workingDirectory);
 
 			SoftwareUpdater.CheckVersion();
-
-            Parallel.ForEach((TranslationFile[])Enum.GetValues(typeof(TranslationFile)), filename =>
-            {
-                var current = SoftwareUpdater.CheckDataVersion(filename);
-                var latest = current;
-
-                if (filename == TranslationFile.Equipment) latest = SoftwareUpdater.EqVer;
-                if (filename == TranslationFile.EquipmentTypes) latest = SoftwareUpdater.EqTypeVer;
-                if (filename == TranslationFile.Expeditions) latest = SoftwareUpdater.ExpVer;
-                if (filename == TranslationFile.Operations) latest = SoftwareUpdater.OpVer;
-                if (filename == TranslationFile.Quests) latest = SoftwareUpdater.QuestVer;
-                if (filename == TranslationFile.Ships) latest = SoftwareUpdater.ShipVer;
-                if (filename == TranslationFile.ShipTypes) latest = SoftwareUpdater.ShipTypeVer;
-
-                if (current != latest)
-                    SoftwareUpdater.DownloadData(filename);
-                LoadFile(filename);
-            });
         }
 
         private IEnumerable<XElement> GetTranslationList(TranslationType type)
@@ -110,48 +57,48 @@ namespace ElectronicObserver.Utility
             switch (type)
             {
                 case TranslationType.Ships:
-                    if (_shipsXml != null)
-                        return _shipsXml.Descendants("Ship");
+                    if (shipsXml != null)
+                        return shipsXml.Descendants("Ship");
                     break;
                 case TranslationType.ShipTypes:
-                    if (_shipTypesXml != null)
-                        return _shipTypesXml.Descendants("Type");
+                    if (shipTypesXml != null)
+                        return shipTypesXml.Descendants("Type");
                     break;
                 case TranslationType.Equipment:
-                    if (_equipmentXml != null)
-                        return _equipmentXml.Descendants("Item");
+                    if (equipmentXml != null)
+                        return equipmentXml.Descendants("Item");
                     break;
 				case TranslationType.EquipmentDesc:
-					if (_equipmentXml != null)
-						return _equipmentXml.Descendants("ItemDesc");
+					if (equipmentXml != null)
+						return equipmentXml.Descendants("ItemDesc");
 					break;
 				case TranslationType.EquipmentType:
-                    if (_equipTypesXml != null)
-                        return _equipTypesXml.Descendants("Type");
+                    if (equipTypesXml != null)
+                        return equipTypesXml.Descendants("Type");
                     break;
                 case TranslationType.OperationMaps:
-                    if (_operationsXml != null)
-                        return _operationsXml.Descendants("Map");
+                    if (operationsXml != null)
+                        return operationsXml.Descendants("Map");
                     break;
                 case TranslationType.OperationSortie:
-                    if (_operationsXml != null)
-                        return _operationsXml.Descendants("Sortie");
+                    if (operationsXml != null)
+                        return operationsXml.Descendants("Sortie");
                     break;
 				case TranslationType.OperationMapNodes:
-					if (_operationsXml != null)
-						return _operationsXml.Descendants("MapNode");
+					if (operationsXml != null)
+						return operationsXml.Descendants("MapNode");
 					break;
 				case TranslationType.Quests:
                 case TranslationType.QuestTitle:
                 case TranslationType.QuestDetail:
-                    if (_questsXml != null)
-                        return _questsXml.Descendants("Quest");
+                    if (questsXml != null)
+                        return questsXml.Descendants("Quest");
                     break;
                 case TranslationType.Expeditions:
                 case TranslationType.ExpeditionTitle:
                 case TranslationType.ExpeditionDetail:
-                    if (_expeditionsXml != null)
-                        return _expeditionsXml.Descendants("Expedition");
+                    if (expeditionsXml != null)
+                        return expeditionsXml.Descendants("Expedition");
                     break;
                 default:
                     return null;
@@ -195,7 +142,7 @@ namespace ElectronicObserver.Utility
 
 	    public string GetMapNodes(int worldId, int areaId, int nodeId)
 		{
-			var filepath = _folder + @"\nodes.json";
+			var filepath = workingDirectory + @"\nodes.json";
 		    var id = nodeId.ToString();
 			if (Configuration.Config.UI.UseOriginalNodeId)
 				return id;

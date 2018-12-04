@@ -238,7 +238,7 @@ namespace ElectronicObserver.Window
 				tooltip.AppendFormat("Naval Exercises: {0} / Win: {1} ({2:p2}) / Lose: {3}\r\n",
 					practiceCount, db.Admiral.PracticeWin, db.Admiral.PracticeWin / Math.Max(practiceCount, 1.0), db.Admiral.PracticeLose);
 
-				tooltip.AppendFormat("Memedals: {0}\r\n", db.Admiral.Medals);
+				tooltip.AppendFormat("First-class Medals: {0}\r\n", db.Admiral.Medals);
 
 				ToolTipInfo.SetToolTip(AdmiralName, tooltip.ToString());
 			}
