@@ -257,7 +257,6 @@ namespace ElectronicObserver.Utility
 	        {
 	            using (var client = new WebClient())
 	            {
-	                client.OpenRead(AppSettings.Default.EOTranslations);
 	                client.DownloadFile(new Uri(url), dest);
 	                Logger.Add(2, $"File {filename} updated.");
 	            }

@@ -223,6 +223,7 @@
     </Compile>
     <Compile Include="Utility\DynamicTranslator.cs" />
     <Compile Include="Utility\SoftwareUpdater.cs" />
+    <Compile Include="Utility\Storage\Theme.cs" />
     <Compile Include="Window\Dialog\ConfigRes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

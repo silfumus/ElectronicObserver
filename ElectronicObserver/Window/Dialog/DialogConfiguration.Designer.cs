@@ -247,6 +247,8 @@
 			this.APIListBrowser = new System.Windows.Forms.OpenFileDialog();
 			this.Log_PlayTime = new System.Windows.Forms.Label();
 			this.PlayTimeTimer = new System.Windows.Forms.Timer(this.components);
+			this.label21 = new System.Windows.Forms.Label();
+			this.comboBox1 = new System.Windows.Forms.ComboBox();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Connection_UpstreamProxyPort)).BeginInit();
@@ -574,6 +576,8 @@
 			this.tabPage2.Controls.Add(this.UI_JapaneseEquipmentNames);
 			this.tabPage2.Controls.Add(this.UI_JapaneseShipTypes);
 			this.tabPage2.Controls.Add(this.UI_JapaneseShipNames);
+			this.tabPage2.Controls.Add(this.label21);
+			this.tabPage2.Controls.Add(this.comboBox1);
 
 			this.tabPage2.Controls.Add(this.tableLayoutPanel1);
 			this.tabPage2.Controls.Add(this.UI_IsLayoutFixed);
@@ -2846,6 +2850,29 @@
 			this.PlayTimeTimer.Enabled = true;
 			this.PlayTimeTimer.Interval = 1000;
 			this.PlayTimeTimer.Tick += new System.EventHandler(this.PlayTimeTimer_Tick);
+			// 
+			// label21
+			// 
+			this.label21.AutoSize = true;
+			this.label21.Location = new System.Drawing.Point(8, 197);
+			this.label21.Name = "label21";
+			this.label21.Size = new System.Drawing.Size(57, 15);
+			this.label21.TabIndex = 16;
+			this.label21.Text = "Theme: ";
+			// 
+			// comboBox1
+			// 
+			this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBox1.FormattingEnabled = true;
+			this.comboBox1.Location = new System.Drawing.Point(71, 194);
+			this.comboBox1.Name = "comboBox1";
+			this.comboBox1.Size = new System.Drawing.Size(80, 23);
+			this.comboBox1.TabIndex = 17;
+			this.comboBox1.Items.AddRange(new object[] {
+				"Light", "Dark", "Custom"});
+			this.ToolTipInfo.SetToolTip(this.comboBox1, "Use the specified color theme.\n" +
+			                                            "Changes will take effect after restart.\n" +
+			                                            "Custom option will use color values from Settings\\ColorScheme.json");
 			//
 			// DialogConfiguration
 			//
@@ -3155,5 +3182,7 @@
 		private System.Windows.Forms.Label label20;
 		private System.Windows.Forms.CheckBox FormBrowser_PreserveDrawingBuffer;
 		private System.Windows.Forms.CheckBox FormBrowser_ForceColorProfile;
+		private System.Windows.Forms.Label label21;
+		private System.Windows.Forms.ComboBox comboBox1;
 	}
 }

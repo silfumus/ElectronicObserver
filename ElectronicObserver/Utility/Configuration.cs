@@ -184,8 +184,11 @@ namespace ElectronicObserver.Utility
 				/// </summary>
 				public bool UseOriginalNodeId { get; set; }
 
-				// ThemeID
-				public int ThemeID { get; set; }
+			    // ColorMode
+			    public int ThemeMode { get; set; }
+
+                // ThemeID
+                public int ThemeID { get; set; }
 
 				// 明石 ToolTip 每 HP 耗时最大显示数量
 				public int MaxAkashiPerHP { get; set; }
@@ -461,6 +464,7 @@ namespace ElectronicObserver.Utility
 				{
 					MainFont = new Font( "Meiryo UI", 12, FontStyle.Regular, GraphicsUnit.Pixel );
 					SubFont = new Font( "Meiryo UI", 10, FontStyle.Regular, GraphicsUnit.Pixel );
+				    ThemeMode = 0;
 					ThemeID = 0;
 					MaxAkashiPerHP = 5;
 					DockingUnitTimeOffset = 30;
@@ -1683,207 +1687,74 @@ namespace ElectronicObserver.Utility
 					Resources.FirstTimeTitle, MessageBoxButtons.OK, MessageBoxIcon.Information );
 			}
 
+		    ApplyTheme();
+		}
 
-			// 读取配色主题 ( 默认值待编辑 )
-			dynamic json = DynamicJson.Parse(@"[{
-""name"":""Light"",
-""basicColors"":{
-""red"":""#FF0000"",
-""orange"":""#FFA500"",
-""yellow"":""#FFFF00"",
-""green"":""#00FF00"",
-""cyan"":""#00FFFF"",
-""blue"":""#0000FF"",
-""magenta"":""#FF00FF"",
-""violet"":""#EE82EE""
-},
-""barColors"":[[
-""#FF0000"",
-""#FF0000"",
-""#FF8800"",
-""#FF8800"",
-""#FFCC00"",
-""#FFCC00"",
-""#00CC00"",
-""#00CC00"",
-""#0044CC"",
-""#44FF00"",
-""#882222"",
-""#888888""
-],[
-""#FF0000"",
-""#FF0000"",
-""#FF4400"",
-""#FF8800"",
-""#FFAA00"",
-""#EEEE00"",
-""#CCEE00"",
-""#00CC00"",
-""#0044CC"",
-""#00FF44"",
-""#882222"",
-""#888888""
-]],
-""panelColors"":{
-""foreground"":""#000000"",
-""background"":""#F0F0F0"",
-""foreground2"":""#888888"",
-""background2"":""#E3E3E3"",
-""statusBarFG"":""#000000"",
-""statusBarBG"":""#E3E3E3"",
-""skin"":{
-""panelSplitter"":""#E3E3E3"",
-""docTabBarFG"":""#000000"",
-""docTabBarBG"":""#F0F0F0"",
-""docTabActiveFG"":""#FFFFFF"",
-""docTabActiveBG"":""#007ACC"",
-""docTabActiveLostFocusFG"":""#6D6D6D"",
-""docTabActiveLostFocusBG"":""#CCCEDB"",
-""docTabInactiveHoverFG"":""#FFFFFF"",
-""docTabInactiveHoverBG"":""#1C97EA"",
-""docBtnActiveHoverFG"":""#FFFFFF"",
-""docBtnActiveHoverBG"":""#1C97EA"",
-""docBtnActiveLostFocusHoverFG"":""#717171"",
-""docBtnActiveLostFocusHoverBG"":""#E6E7ED"",
-""docBtnInactiveHoverFG"":""#FFFFFF"",
-""docBtnInactiveHoverBG"":""#52B0EF"",
-""toolTabBarFG"":""#6D6D6D"",
-""toolTabBarBG"":""#F0F0F0"",
-""toolTabActive"":""#007ACC"",
-""toolTitleActiveFG"":""#FFFFFF"",
-""toolTitleActiveBG"":""#007ACC"",
-""toolTitleLostFocusFG"":""#6D6D6D"",
-""toolTitleLostFocusBG"":""#F0F0F0"",
-""toolTitleDotActive"":""#50AADC"",
-""toolTitleDotLostFocus"":""#A0A0A0"",
-""autoHideTabBarFG"":""#E3E3E3"",
-""autoHideTabBarBG"":""#F0F0F0"",
-""autoHideTabActive"":""#007ACC"",
-""autoHideTabInactive"":""#6D6D6D""
-},
-""fleet"":{
-""repairTimerText"":""#888888"",
-""conditionText"":""#000000"",
-""conditionVeryTired"":""#F08080"",
-""conditionTired"":""#FFA07A"",
-""conditionLittleTired"":""#FFE4B5"",
-""conditionSparkle"":""#90EE90"",
-""equipmentLevel"":""#006666""
-},
-""fleetOverview"":{
-""shipDamagedFG"":""#000000"",
-""shipDamagedBG"":""#F08080"",
-""expeditionOverFG"":""#000000"",
-""expeditionOverBG"":""#90EE90"",
-""tiredRecoveredFG"":""#000000"",
-""tiredRecoveredBG"":""#90EE90"",
-""alertNotInExpeditionFG"":""#000000"",
-""alertNotInExpeditionBG"":""#90EE90""
-},
-""dock"":{
-""repairFinishedFG"":""#000000"",
-""repairFinishedBG"":""#90EE90""
-},
-""arsenal"":{
-""buildCompleteFG"":""#000000"",
-""buildCompleteBG"":""#90EE90""
-},
-""hq"":{
-""resOverFG"":""#000000"",
-""resOverBG"":""#FFE4B5"",
-""shipOverFG"":""#000000"",
-""shipOverBG"":""#F08080"",
-""materialMaxFG"":""#000000"",
-""materialMaxBG"":""#F08080"",
-""coinMaxFG"":""#000000"",
-""coinMaxFG"":""#F08080"",
-""resLowFG"":""#000000"",
-""resLowBG"":""#F08080"",
-""resMaxFG"":""#000000"",
-""resMaxBG"":""#F08080""
-},
-""quest"":{
-""typeFG"":""#000000"",
-""typeHensei"":""#AAFFAA"",
-""typeShutsugeki"":""#FFCCCC"",
-""typeEnshu"":""#DDFFAA"",
-""typeEnsei"":""#CCFFFF"",
-""typeHokyu"":""#FFFFCC"",
-""typeKojo"":""#DDCCBB"",
-""typeKaiso"":""#DDCCFF"",
-""processLT50"":""#FF8800"",
-""processLT80"":""#00CC00"",
-""processLT100"":""#008800"",
-""processDefault"":""#0088FF""
-},
-""compass"":{
-""shipClass2"":""#FF0000"",
-""shipClass3"":""#FF8800"",
-""shipClass4"":""#006600"",
-""shipClass5"":""#880000"",
-""shipClass6"":""#0088FF"",
-""shipClass7"":""#FF00FF"",
-""shipDestroyed"":""#0000FF"",
-""eventKind3"":""#000080"",
-""eventKind6"":""#006400"",
-""eventKind5"":""#8B0000""
-},
-""battle"":{
-""barMVP"":""#FFE4B5"",
-""textMVP"":""#000000"",
-""textMVP2"":""#888888"",
-""barEscaped"":""#C0C0C0"",
-""textEscaped"":""#000000"",
-""textEscaped2"":""#888888"",
-""barBossDamaged"":""#FFE4E1"",
-""textBossDamaged"":""#000000"",
-""textBossDamaged2"":""#888888""
-}}}]");
-			//if (File.Exists(@"Settings\ColorScheme.json")) {
-			try {
-				string s = String.Empty;
-				StringBuilder sb = new StringBuilder();
-				// 读取配色文件
-				using (StreamReader sr = File.OpenText( @"Settings\ColorScheme.json" )) {
-					while ((s = sr.ReadLine()) != null) {
-						// 干掉注释，因为 DynamicJson 不支持注释
-						s = Regex.Replace( s, @"\/\/.*?$", string.Empty );
-						if (!String.IsNullOrWhiteSpace( s )) sb.Append( s );
+		private dynamic ThemeStyle;
+
+		private void ApplyTheme()
+		{
+			dynamic json;
+			if (Config.UI.ThemeMode != 2)
+			{
+				string theme = Theme.GetTheme(Config.UI.ThemeMode);
+				json = DynamicJson.Parse(theme);
+			}
+			else
+			{
+				try
+				{
+					string s = String.Empty;
+					StringBuilder sb = new StringBuilder();
+					using (StreamReader sr = File.OpenText(@"Settings\ColorScheme.json"))
+					{
+						while ((s = sr.ReadLine()) != null)
+						{
+							s = Regex.Replace(s, @"\/\/.*?$", string.Empty);
+							if (!String.IsNullOrWhiteSpace(s)) sb.Append(s);
+						}
 					}
+					json = DynamicJson.Parse(sb.ToString());
 				}
-				json = DynamicJson.Parse( sb.ToString() );
+				catch (FileNotFoundException)
+				{
+					Logger.Add(3, @"Settings\ColorScheme.json not found.");
+					json = DynamicJson.Parse(Theme.GetTheme(0));
+				}
+				catch
+				{
+					Logger.Add(3, @"Failed to read Settings\ColorScheme.json.");
+					json = DynamicJson.Parse(Theme.GetTheme(0));
+				}
 			}
-			catch (FileNotFoundException) {
-				Logger.Add( 1, @"Settings\ColorScheme.json not found." );
-			}
-			catch {
-				Logger.Add( 1, @"Failed to read Settings\ColorScheme.json." );
-			}
+
 			int themeId = Config.UI.ThemeID;
-			if (!json.IsDefined( themeId )) {
+			if (!json.IsDefined(themeId))
+			{
 				themeId = Config.UI.ThemeID = 0;
-				Logger.Add( 2, "Failed to find selected ThemeID" );
+				Logger.Add(2, "Failed to find selected ThemeID");
 			}
+
 			ThemeStyle = json[themeId];
-			Logger.Add( 1, "Color theme loaded: " + ThemeStyle["name"] );
+			Logger.Add(1, "Color theme loaded: " + ThemeStyle["name"]);
 			// 定义基本颜色
-			Config.UI.Color_Red = ThemeColor( "basicColors", "red" );
-			Config.UI.Color_Orange = ThemeColor( "basicColors", "orange" );
-			Config.UI.Color_Yellow = ThemeColor( "basicColors", "yellow" );
-			Config.UI.Color_Green = ThemeColor( "basicColors", "green" );
-			Config.UI.Color_Cyan = ThemeColor( "basicColors", "cyan" );
-			Config.UI.Color_Blue = ThemeColor( "basicColors", "blue" );
-			Config.UI.Color_Magenta = ThemeColor( "basicColors", "magenta" );
-			Config.UI.Color_Violet = ThemeColor( "basicColors", "violet" );
+			Config.UI.Color_Red = ThemeColor("basicColors", "red");
+			Config.UI.Color_Orange = ThemeColor("basicColors", "orange");
+			Config.UI.Color_Yellow = ThemeColor("basicColors", "yellow");
+			Config.UI.Color_Green = ThemeColor("basicColors", "green");
+			Config.UI.Color_Cyan = ThemeColor("basicColors", "cyan");
+			Config.UI.Color_Blue = ThemeColor("basicColors", "blue");
+			Config.UI.Color_Magenta = ThemeColor("basicColors", "magenta");
+			Config.UI.Color_Violet = ThemeColor("basicColors", "violet");
 			// 定义面板颜色
-			Config.UI.ForeColor = ThemeColor( "panelColors", "foreground" );
-			Config.UI.BackColor = ThemeColor( "panelColors", "background" );
-			Config.UI.SubForeColor = ThemeColor( "panelColors", "foreground2" );
-			Config.UI.SubBackColor = ThemeColor( "panelColors", "background2" );
-			Config.UI.SubBackColorPen = new Pen( Config.UI.SubBackColor );
+			Config.UI.ForeColor = ThemeColor("panelColors", "foreground");
+			Config.UI.BackColor = ThemeColor("panelColors", "background");
+			Config.UI.SubForeColor = ThemeColor("panelColors", "foreground2");
+			Config.UI.SubBackColor = ThemeColor("panelColors", "background2");
+			Config.UI.SubBackColorPen = new Pen(Config.UI.SubBackColor);
 			// 状态栏颜色
-			Config.UI.StatusBarForeColor = ThemeColor( "panelColors", "statusBarFG" );
-			Config.UI.StatusBarBackColor = ThemeColor( "panelColors", "statusBarBG" );
+			Config.UI.StatusBarForeColor = ThemeColor("panelColors", "statusBarFG");
+			Config.UI.StatusBarBackColor = ThemeColor("panelColors", "statusBarBG");
 			// 定义 UI (DockPanelSuite) 颜色
 			Config.UI.DockPanelSuiteStyles = new string[] {
 				ThemePanelColorHex("skin", "panelSplitter"),
@@ -1948,72 +1819,70 @@ namespace ElectronicObserver.Utility
 			};
 			Config.UI.SetBarColorScheme();
 			// 设定各面板颜色
-			Config.UI.Fleet_ColorRepairTimerText = ThemePanelColor( "fleet", "repairTimerText" );
-			Config.UI.Fleet_ColorConditionText = ThemePanelColor( "fleet", "conditionText" );
-			Config.UI.Fleet_ColorConditionVeryTired = ThemePanelColor( "fleet", "conditionVeryTired" );
-			Config.UI.Fleet_ColorConditionTired = ThemePanelColor( "fleet", "conditionTired" );
-			Config.UI.Fleet_ColorConditionLittleTired = ThemePanelColor( "fleet", "conditionLittleTired" );
-			Config.UI.Fleet_ColorConditionSparkle = ThemePanelColor( "fleet", "conditionSparkle" );
-			Config.UI.Fleet_EquipmentLevelColor = ThemePanelColor( "fleet", "equipmentLevel" );
-			Config.UI.FleetOverview_ShipDamagedFG = ThemePanelColor( "fleetOverview", "shipDamagedFG" );
-			Config.UI.FleetOverview_ShipDamagedBG = ThemePanelColor( "fleetOverview", "shipDamagedBG" );
-			Config.UI.FleetOverview_ExpeditionOverFG = ThemePanelColor( "fleetOverview", "expeditionOverFG" );
-			Config.UI.FleetOverview_ExpeditionOverBG = ThemePanelColor( "fleetOverview", "expeditionOverBG" );
-			Config.UI.FleetOverview_TiredRecoveredFG = ThemePanelColor( "fleetOverview", "tiredRecoveredFG" );
-			Config.UI.FleetOverview_TiredRecoveredBG = ThemePanelColor( "fleetOverview", "tiredRecoveredBG" );
-			Config.UI.FleetOverview_AlertNotInExpeditionFG = ThemePanelColor( "fleetOverview", "alertNotInExpeditionFG" );
-			Config.UI.FleetOverview_AlertNotInExpeditionBG = ThemePanelColor( "fleetOverview", "alertNotInExpeditionBG" );
-			Config.UI.Dock_RepairFinishedFG = ThemePanelColor( "dock", "repairFinishedFG" );
-			Config.UI.Dock_RepairFinishedBG = ThemePanelColor( "dock", "repairFinishedBG" );
-			Config.UI.Arsenal_BuildCompleteFG = ThemePanelColor( "arsenal", "buildCompleteFG" );
-			Config.UI.Arsenal_BuildCompleteBG = ThemePanelColor( "arsenal", "buildCompleteBG" );
-			Config.UI.Headquarters_ResourceOverFG = ThemePanelColor( "hq", "resOverFG" );
-			Config.UI.Headquarters_ResourceOverBG = ThemePanelColor( "hq", "resOverBG" );
-			Config.UI.Headquarters_ShipCountOverFG = ThemePanelColor( "hq", "shipOverFG" );
-			Config.UI.Headquarters_ShipCountOverBG = ThemePanelColor( "hq", "shipOverBG" );
-			Config.UI.Headquarters_MaterialMaxFG = ThemePanelColor( "hq", "materialMaxFG" );
-			Config.UI.Headquarters_MaterialMaxBG = ThemePanelColor( "hq", "materialMaxBG" );
-			Config.UI.Headquarters_CoinMaxFG = ThemePanelColor( "hq", "coinMaxFG" );
-			Config.UI.Headquarters_CoinMaxBG = ThemePanelColor( "hq", "coinMaxBG" );
-			Config.UI.Headquarters_ResourceLowFG = ThemePanelColor( "hq", "resLowFG" );
-			Config.UI.Headquarters_ResourceLowBG = ThemePanelColor( "hq", "resLowBG" );
-			Config.UI.Headquarters_ResourceMaxFG = ThemePanelColor( "hq", "resMaxFG" );
-			Config.UI.Headquarters_ResourceMaxBG = ThemePanelColor( "hq", "resMaxBG" );
-			Config.UI.Quest_TypeFG = ThemePanelColor( "quest", "typeFG" );
-			Config.UI.Quest_Type1Color = ThemePanelColor( "quest", "typeHensei" );
-			Config.UI.Quest_Type2Color = ThemePanelColor( "quest", "typeShutsugeki" );
-			Config.UI.Quest_Type3Color = ThemePanelColor( "quest", "typeEnshu" );
-			Config.UI.Quest_Type4Color = ThemePanelColor( "quest", "typeEnsei" );
-			Config.UI.Quest_Type5Color = ThemePanelColor( "quest", "typeHokyu" );
-			Config.UI.Quest_Type6Color = ThemePanelColor( "quest", "typeKojo" );
-			Config.UI.Quest_Type7Color = ThemePanelColor( "quest", "typeKaiso" );
-			Config.UI.Quest_ColorProcessLT50 = ThemePanelColor( "quest", "processLT50" );
-			Config.UI.Quest_ColorProcessLT80 = ThemePanelColor( "quest", "processLT80" );
-			Config.UI.Quest_ColorProcessLT100 = ThemePanelColor( "quest", "processLT100" );
-			Config.UI.Quest_ColorProcessDefault = ThemePanelColor( "quest", "processDefault" );
-			Config.UI.Compass_ShipNameColor2 = ThemePanelColor( "compass", "shipClass2" );
-			Config.UI.Compass_ShipNameColor3 = ThemePanelColor( "compass", "shipClass3" );
-			Config.UI.Compass_ShipNameColor4 = ThemePanelColor( "compass", "shipClass4" );
-			Config.UI.Compass_ShipNameColor5 = ThemePanelColor( "compass", "shipClass5" );
-			Config.UI.Compass_ShipNameColor6 = ThemePanelColor( "compass", "shipClass6" );
-			Config.UI.Compass_ShipNameColor7 = ThemePanelColor( "compass", "shipClass7" );
-			Config.UI.Compass_ShipNameColorDestroyed = ThemePanelColor( "compass", "shipDestroyed" );
-			Config.UI.Compass_ColorTextEventKind3 = ThemePanelColor( "compass", "eventKind3" );
-			Config.UI.Compass_ColorTextEventKind6 = ThemePanelColor( "compass", "eventKind6" );
-			Config.UI.Compass_ColorTextEventKind5 = ThemePanelColor( "compass", "eventKind5" );
-			Config.UI.Compass_ColoroverlayBrush = ThemePanelColor( "compass", "overlayBrush" );
-			Config.UI.Battle_ColorHPBarsMVP = ThemePanelColor( "battle", "barMVP" );
-			Config.UI.Battle_ColorTextMVP = ThemePanelColor( "battle", "textMVP" );
-			Config.UI.Battle_ColorTextMVP2 = ThemePanelColor( "battle", "textMVP2" );
-			Config.UI.Battle_ColorHPBarsEscaped = ThemePanelColor( "battle", "barEscaped" );
-			Config.UI.Battle_ColorTextEscaped = ThemePanelColor( "battle", "textEscaped" );
-			Config.UI.Battle_ColorTextEscaped2 = ThemePanelColor( "battle", "textEscaped2" );
-			Config.UI.Battle_ColorHPBarsBossDamaged = ThemePanelColor( "battle", "barBossDamaged" );
-			Config.UI.Battle_ColorTextBossDamaged = ThemePanelColor( "battle", "textBossDamaged" );
-			Config.UI.Battle_ColorTextBossDamaged2 = ThemePanelColor( "battle", "textBossDamaged2" );
+			Config.UI.Fleet_ColorRepairTimerText = ThemePanelColor("fleet", "repairTimerText");
+			Config.UI.Fleet_ColorConditionText = ThemePanelColor("fleet", "conditionText");
+			Config.UI.Fleet_ColorConditionVeryTired = ThemePanelColor("fleet", "conditionVeryTired");
+			Config.UI.Fleet_ColorConditionTired = ThemePanelColor("fleet", "conditionTired");
+			Config.UI.Fleet_ColorConditionLittleTired = ThemePanelColor("fleet", "conditionLittleTired");
+			Config.UI.Fleet_ColorConditionSparkle = ThemePanelColor("fleet", "conditionSparkle");
+			Config.UI.Fleet_EquipmentLevelColor = ThemePanelColor("fleet", "equipmentLevel");
+			Config.UI.FleetOverview_ShipDamagedFG = ThemePanelColor("fleetOverview", "shipDamagedFG");
+			Config.UI.FleetOverview_ShipDamagedBG = ThemePanelColor("fleetOverview", "shipDamagedBG");
+			Config.UI.FleetOverview_ExpeditionOverFG = ThemePanelColor("fleetOverview", "expeditionOverFG");
+			Config.UI.FleetOverview_ExpeditionOverBG = ThemePanelColor("fleetOverview", "expeditionOverBG");
+			Config.UI.FleetOverview_TiredRecoveredFG = ThemePanelColor("fleetOverview", "tiredRecoveredFG");
+			Config.UI.FleetOverview_TiredRecoveredBG = ThemePanelColor("fleetOverview", "tiredRecoveredBG");
+			Config.UI.FleetOverview_AlertNotInExpeditionFG = ThemePanelColor("fleetOverview", "alertNotInExpeditionFG");
+			Config.UI.FleetOverview_AlertNotInExpeditionBG = ThemePanelColor("fleetOverview", "alertNotInExpeditionBG");
+			Config.UI.Dock_RepairFinishedFG = ThemePanelColor("dock", "repairFinishedFG");
+			Config.UI.Dock_RepairFinishedBG = ThemePanelColor("dock", "repairFinishedBG");
+			Config.UI.Arsenal_BuildCompleteFG = ThemePanelColor("arsenal", "buildCompleteFG");
+			Config.UI.Arsenal_BuildCompleteBG = ThemePanelColor("arsenal", "buildCompleteBG");
+			Config.UI.Headquarters_ResourceOverFG = ThemePanelColor("hq", "resOverFG");
+			Config.UI.Headquarters_ResourceOverBG = ThemePanelColor("hq", "resOverBG");
+			Config.UI.Headquarters_ShipCountOverFG = ThemePanelColor("hq", "shipOverFG");
+			Config.UI.Headquarters_ShipCountOverBG = ThemePanelColor("hq", "shipOverBG");
+			Config.UI.Headquarters_MaterialMaxFG = ThemePanelColor("hq", "materialMaxFG");
+			Config.UI.Headquarters_MaterialMaxBG = ThemePanelColor("hq", "materialMaxBG");
+			Config.UI.Headquarters_CoinMaxFG = ThemePanelColor("hq", "coinMaxFG");
+			Config.UI.Headquarters_CoinMaxBG = ThemePanelColor("hq", "coinMaxBG");
+			Config.UI.Headquarters_ResourceLowFG = ThemePanelColor("hq", "resLowFG");
+			Config.UI.Headquarters_ResourceLowBG = ThemePanelColor("hq", "resLowBG");
+			Config.UI.Headquarters_ResourceMaxFG = ThemePanelColor("hq", "resMaxFG");
+			Config.UI.Headquarters_ResourceMaxBG = ThemePanelColor("hq", "resMaxBG");
+			Config.UI.Quest_TypeFG = ThemePanelColor("quest", "typeFG");
+			Config.UI.Quest_Type1Color = ThemePanelColor("quest", "typeHensei");
+			Config.UI.Quest_Type2Color = ThemePanelColor("quest", "typeShutsugeki");
+			Config.UI.Quest_Type3Color = ThemePanelColor("quest", "typeEnshu");
+			Config.UI.Quest_Type4Color = ThemePanelColor("quest", "typeEnsei");
+			Config.UI.Quest_Type5Color = ThemePanelColor("quest", "typeHokyu");
+			Config.UI.Quest_Type6Color = ThemePanelColor("quest", "typeKojo");
+			Config.UI.Quest_Type7Color = ThemePanelColor("quest", "typeKaiso");
+			Config.UI.Quest_ColorProcessLT50 = ThemePanelColor("quest", "processLT50");
+			Config.UI.Quest_ColorProcessLT80 = ThemePanelColor("quest", "processLT80");
+			Config.UI.Quest_ColorProcessLT100 = ThemePanelColor("quest", "processLT100");
+			Config.UI.Quest_ColorProcessDefault = ThemePanelColor("quest", "processDefault");
+			Config.UI.Compass_ShipNameColor2 = ThemePanelColor("compass", "shipClass2");
+			Config.UI.Compass_ShipNameColor3 = ThemePanelColor("compass", "shipClass3");
+			Config.UI.Compass_ShipNameColor4 = ThemePanelColor("compass", "shipClass4");
+			Config.UI.Compass_ShipNameColor5 = ThemePanelColor("compass", "shipClass5");
+			Config.UI.Compass_ShipNameColor6 = ThemePanelColor("compass", "shipClass6");
+			Config.UI.Compass_ShipNameColor7 = ThemePanelColor("compass", "shipClass7");
+			Config.UI.Compass_ShipNameColorDestroyed = ThemePanelColor("compass", "shipDestroyed");
+			Config.UI.Compass_ColorTextEventKind3 = ThemePanelColor("compass", "eventKind3");
+			Config.UI.Compass_ColorTextEventKind6 = ThemePanelColor("compass", "eventKind6");
+			Config.UI.Compass_ColorTextEventKind5 = ThemePanelColor("compass", "eventKind5");
+			Config.UI.Compass_ColoroverlayBrush = ThemePanelColor("compass", "overlayBrush");
+			Config.UI.Battle_ColorHPBarsMVP = ThemePanelColor("battle", "barMVP");
+			Config.UI.Battle_ColorTextMVP = ThemePanelColor("battle", "textMVP");
+			Config.UI.Battle_ColorTextMVP2 = ThemePanelColor("battle", "textMVP2");
+			Config.UI.Battle_ColorHPBarsEscaped = ThemePanelColor("battle", "barEscaped");
+			Config.UI.Battle_ColorTextEscaped = ThemePanelColor("battle", "textEscaped");
+			Config.UI.Battle_ColorTextEscaped2 = ThemePanelColor("battle", "textEscaped2");
+			Config.UI.Battle_ColorHPBarsBossDamaged = ThemePanelColor("battle", "barBossDamaged");
+			Config.UI.Battle_ColorTextBossDamaged = ThemePanelColor("battle", "textBossDamaged");
+			Config.UI.Battle_ColorTextBossDamaged2 = ThemePanelColor("battle", "textBossDamaged2");
 		}
-
-		private dynamic ThemeStyle;
 
 		private Color ThemeColor(string type, string name) {
 			if (ThemeStyle.IsDefined(type) && ThemeStyle[type].IsDefined(name)) {
