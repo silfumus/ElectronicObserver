@@ -1489,8 +1489,8 @@ namespace ElectronicObserver.Utility
 
 						g.DrawString(baseDistanceTitle, args.SmallFont, subTextBrush, new Rectangle(basePointer + GetAlignmentOffset(ContentAlignment.MiddleLeft, baseDistanceTitleSize, baseParameterAreaSize), baseDistanceTitleSize), formatMiddleLeft);
 						basePointer.X += baseDistanceTitleSize.Width;
-
-						Size paramValueSize = MeasureString(g, baseAirCorps.Distance.ToString(), args.MediumDigitFont, MaxValueSize, formatMiddleLeft);
+                        var act_dist = baseAirCorps.Distance;
+						Size paramValueSize = MeasureString(g, act_dist.ToString(), args.MediumDigitFont, MaxValueSize, formatMiddleLeft);
 						g.DrawString(baseAirCorps.Distance.ToString(), args.MediumDigitFont, mainTextBrush, new Rectangle(basePointer + GetAlignmentOffset(ContentAlignment.MiddleLeft, paramValueSize, baseParameterAreaSize), paramValueSize), formatMiddleLeft);
 						basePointer.X += paramValueSize.Width + baseParameterAreaInnerMargin.Width;
 					}

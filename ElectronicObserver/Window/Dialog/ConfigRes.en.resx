@@ -480,9 +480,6 @@ More details, as well as an access key, can be found on the site below. (opens y
   <data name="FileName" xml:space="preserve">
     <value>File Name</value>
   </data>
-  <data name="FleetBlinkAtCompletion" xml:space="preserve">
-    <value>Blink when the timer is complete</value>
-  </data>
   <data name="Life_CanCloseFloatWindowInLock" xml:space="preserve">
     <value>Allow tab to be closed when layout is locked</value>
   </data>

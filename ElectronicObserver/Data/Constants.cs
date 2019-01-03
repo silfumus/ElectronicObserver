@@ -375,6 +375,10 @@ namespace ElectronicObserver.Data
 				case 85: return "日振型";
 				case 86: return "呂号潜水艦";
 				case 87: return "John C.Butler級";
+				case 88: return "Nelson級";
+				case 89: return "Gotland級";
+				case 90: return "日進型";
+				case 91: return "Fletcher級";
 				default: return "不明";
 			}
 		}
@@ -442,6 +446,8 @@ namespace ElectronicObserver.Data
 					return ConstantsRes.AirRaid;
 				case 7:
 					return ConstantsRes.NightDayBattle;       // 対連合
+				case 8:
+					return "Radar";
 				default:
 					return ConstantsRes.Unknown;
 			}
@@ -791,6 +797,8 @@ namespace ElectronicObserver.Data
 					return "CI (Carrier)";
 				case DayAttackKind.SpecialNelson:
 					return "Nelson Touch";
+				case DayAttackKind.SpecialNagato:
+					return "Full broadside... Sounds exciting!";
 				case DayAttackKind.Shelling:
 					return "Shelling";
 				case DayAttackKind.AirAttack:
@@ -839,11 +847,13 @@ namespace ElectronicObserver.Data
 				case NightAttackKind.CutinAirAttack:
 					return "CI (Carrier)";
 				case NightAttackKind.CutinTorpedoRadar:
-					return "駆逐カットイン(主砲/魚雷/電探)";
+					return "DD CI (MG+Torp+Radar)";
 				case NightAttackKind.CutinTorpedoPicket:
-					return "駆逐カットイン(魚雷/見張員/電探)";
+					return "DD CI (Torp+Lookout+Radar)";
 				case NightAttackKind.SpecialNelson:
 					return "Nelson Touch";
+				case NightAttackKind.SpecialNagato:
+					return "Full broadside... Sounds exciting!";
 				case NightAttackKind.Shelling:
 					return "Shelling";
 				case NightAttackKind.AirAttack:
@@ -924,7 +934,7 @@ namespace ElectronicObserver.Data
 				case 23:
 					return ConstantsRes.AAGun + " (Unconcentrated) (UIT-25)";
 				case 24:
-					return ConstantsRes.HAGun + ConstantsRes.AAGun + " (Unconcentrated) (Tatsuta)";
+					return ConstantsRes.HAGun + "/" + ConstantsRes.AAGun + " (Unconcentrated) (Tatsuta)";
 				case 25:
 					return "Rocket Launcher Kai Ni/" + ConstantsRes.Radar + "/" + ConstantsRes.Type3 + " (Ise)";
 				case 26:
@@ -933,6 +943,14 @@ namespace ElectronicObserver.Data
 					return "Rocket Launcher Kai Ni/" + ConstantsRes.Radar + " (Ise)";
 				case 29:
 					return ConstantsRes.HAGun + "/" + ConstantsRes.Radar + " (Hamakaze)";
+				case 30:
+					return ConstantsRes.HAGun + "x3 (Tenryuu)";
+				case 31:
+					return ConstantsRes.HAGun + "x2 (Tenryuu)";
+				case 32:
+					return "Rocket Launcherx2 or FCR/Pom-pom Gun or Rocket Launcher/Pom-pom Gun (UK)";
+				case 33:
+					return ConstantsRes.HAGun + "/" + ConstantsRes.AAGun + " (Unconcentrated) (Gotland)";
 				default:
 					return ConstantsRes.Unknown;
 			}

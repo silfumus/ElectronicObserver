@@ -249,6 +249,7 @@
 			this.PlayTimeTimer = new System.Windows.Forms.Timer(this.components);
 			this.label21 = new System.Windows.Forms.Label();
 			this.comboBox1 = new System.Windows.Forms.ComboBox();
+			this.FormFleet_AppliesSallyAreaColor = new System.Windows.Forms.CheckBox();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Connection_UpstreamProxyPort)).BeginInit();
@@ -1051,7 +1052,7 @@
 			this.Debug_SealingPanel.Controls.Add(this.Debug_APIListPathSearch);
 			this.Debug_SealingPanel.Location = new System.Drawing.Point(0, 56);
 			this.Debug_SealingPanel.Name = "Debug_SealingPanel";
-			this.Debug_SealingPanel.Size = new System.Drawing.Size(696, 257);
+			this.Debug_SealingPanel.Size = new System.Drawing.Size(696, 255);
 			this.Debug_SealingPanel.TabIndex = 1;
 			//
 			// Debug_APIListPath
@@ -1265,6 +1266,7 @@
 			//
 			// tabPage8
 			//
+			this.tabPage8.Controls.Add(this.FormFleet_AppliesSallyAreaColor);
 			this.tabPage8.Controls.Add(this.label43);
 			this.tabPage8.Controls.Add(this.FormFleet_FleetStateDisplayMode);
 			this.tabPage8.Controls.Add(this.FormFleet_EmphasizesSubFleetInPort);
@@ -2608,7 +2610,7 @@
 			//
 			this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(3, 328);
+			this.label10.Location = new System.Drawing.Point(3, 326);
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(238, 15);
 			this.label10.TabIndex = 5;
@@ -2753,7 +2755,7 @@
 			this.BGMPlayer_ControlGrid.RowHeadersVisible = false;
 			this.BGMPlayer_ControlGrid.RowTemplate.Height = 21;
 			this.BGMPlayer_ControlGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.BGMPlayer_ControlGrid.Size = new System.Drawing.Size(684, 277);
+			this.BGMPlayer_ControlGrid.Size = new System.Drawing.Size(684, 275);
 			this.BGMPlayer_ControlGrid.TabIndex = 0;
 			this.BGMPlayer_ControlGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BGMPlayer_ControlGrid_CellContentClick);
 			this.BGMPlayer_ControlGrid.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.BGMPlayer_ControlGrid_CellFormatting);
@@ -2850,18 +2852,18 @@
 			this.PlayTimeTimer.Enabled = true;
 			this.PlayTimeTimer.Interval = 1000;
 			this.PlayTimeTimer.Tick += new System.EventHandler(this.PlayTimeTimer_Tick);
-			// 
+			//
 			// label21
-			// 
+			//
 			this.label21.AutoSize = true;
 			this.label21.Location = new System.Drawing.Point(8, 197);
 			this.label21.Name = "label21";
 			this.label21.Size = new System.Drawing.Size(57, 15);
 			this.label21.TabIndex = 16;
 			this.label21.Text = "Theme: ";
-			// 
+			//
 			// comboBox1
-			// 
+			//
 			this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBox1.FormattingEnabled = true;
 			this.comboBox1.Location = new System.Drawing.Point(71, 194);
@@ -2873,6 +2875,17 @@
 			this.ToolTipInfo.SetToolTip(this.comboBox1, "Use the specified color theme.\n" +
 			                                            "Changes will take effect after restart.\n" +
 			                                            "Custom option will use color values from Settings\\ColorScheme.json");
+			//
+			// FormFleet_AppliesSallyAreaColor
+			//
+			this.FormFleet_AppliesSallyAreaColor.AutoSize = true;
+			this.FormFleet_AppliesSallyAreaColor.Location = new System.Drawing.Point(358, 188);
+			this.FormFleet_AppliesSallyAreaColor.Name = "FormFleet_AppliesSallyAreaColor";
+			this.FormFleet_AppliesSallyAreaColor.Size = new System.Drawing.Size(170, 19);
+			this.FormFleet_AppliesSallyAreaColor.TabIndex = 23;
+			this.FormFleet_AppliesSallyAreaColor.Text = "Use fleet tag color";
+			this.ToolTipInfo.SetToolTip(this.FormFleet_AppliesSallyAreaColor, "Use fleet tag color as background of each ship name.\nThe colors may not match each event tag colors.");
+			this.FormFleet_AppliesSallyAreaColor.UseVisualStyleBackColor = true;
 			//
 			// DialogConfiguration
 			//
@@ -3184,5 +3197,6 @@
 		private System.Windows.Forms.CheckBox FormBrowser_ForceColorProfile;
 		private System.Windows.Forms.Label label21;
 		private System.Windows.Forms.ComboBox comboBox1;
+		private System.Windows.Forms.CheckBox FormFleet_AppliesSallyAreaColor;
 	}
 }
