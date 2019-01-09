@@ -23,7 +23,8 @@
 			this.ContextMenuFleet_CopyFleet = new System.Windows.Forms.ToolStripMenuItem();
 			this.ContextMenuFleet_CopyFleetDeckBuilder = new System.Windows.Forms.ToolStripMenuItem();
 			this.ContextMenuFleet_CopyKanmusuList = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ContextMenuFleet_CopyFleetAnalysis = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.ContextMenuFleet_AntiAirDetails = new System.Windows.Forms.ToolStripMenuItem();
 			this.ContextMenuFleet_Capture = new System.Windows.Forms.ToolStripMenuItem();
 			this.ContextMenuFleet_OutputFleetImage = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,6 +76,7 @@
 			this.ContextMenuFleet_CopyFleet,
 			this.ContextMenuFleet_CopyFleetDeckBuilder,
 			this.ContextMenuFleet_CopyKanmusuList,
+            this.ContextMenuFleet_CopyFleetAnalysis,
 			this.toolStripSeparator1,
 			this.ContextMenuFleet_AntiAirDetails,
 			this.ContextMenuFleet_Capture,
@@ -103,10 +105,17 @@
 			this.ContextMenuFleet_CopyKanmusuList.Size = new System.Drawing.Size(227, 22);
 			this.ContextMenuFleet_CopyKanmusuList.Text = "Copy Ship &List (kancolle-calc)";
 			this.ContextMenuFleet_CopyKanmusuList.Click += new System.EventHandler(this.ContextMenuFleet_CopyKanmusuList_Click);
-			//
-			// toolStripSeparator1
-			//
-			this.toolStripSeparator1.Name = "toolStripSeparator1";
+            //
+            // ContextMenuFleet_CopyFleetAnalysis
+            //
+            this.ContextMenuFleet_CopyFleetAnalysis.Name = "ContextMenuFleet_CopyFleetAnalysis";
+            this.ContextMenuFleet_CopyFleetAnalysis.Size = new System.Drawing.Size(227, 22);
+            this.ContextMenuFleet_CopyFleetAnalysis.Text = "Copy Ship List (kancolle-&fleetanalysis)";
+			this.ContextMenuFleet_CopyFleetAnalysis.Click += new System.EventHandler(this.ContextMenuFleet_CopyFleetAnalysis_Click);
+            //
+            // toolStripSeparator1
+            //
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
 			this.toolStripSeparator1.Size = new System.Drawing.Size(224, 6);
 			//
 			// ContextMenuFleet_AntiAirDetails
@@ -171,7 +180,8 @@
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
 		private System.Windows.Forms.ToolStripMenuItem ContextMenuFleet_CopyFleetDeckBuilder;
 		private System.Windows.Forms.ToolStripMenuItem ContextMenuFleet_CopyKanmusuList;
-		private System.Windows.Forms.ToolStripMenuItem ContextMenuFleet_AntiAirDetails;
+        private System.Windows.Forms.ToolStripMenuItem ContextMenuFleet_CopyFleetAnalysis;
+        private System.Windows.Forms.ToolStripMenuItem ContextMenuFleet_AntiAirDetails;
 		private System.Windows.Forms.ToolStripMenuItem ContextMenuFleet_OutputFleetImage;
 	}
 }

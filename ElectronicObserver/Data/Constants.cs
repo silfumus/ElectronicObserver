@@ -898,7 +898,7 @@ namespace ElectronicObserver.Data
 				case 4:
 					return ConstantsRes.BigGun + "/" + ConstantsRes.Type3 + "/" + ConstantsRes.AADirector + "/" + ConstantsRes.Radar;
 				case 5:
-					return ConstantsRes.HAAAD + "x2/" + ConstantsRes.Radar;
+					return ConstantsRes.HAAAD + " x2/" + ConstantsRes.Radar;
 				case 6:
 					return ConstantsRes.BigGun + "/" + ConstantsRes.Type3 + "/" + ConstantsRes.AADirector;
 				case 7:
@@ -944,13 +944,21 @@ namespace ElectronicObserver.Data
 				case 29:
 					return ConstantsRes.HAGun + "/" + ConstantsRes.Radar + " (Hamakaze)";
 				case 30:
-					return ConstantsRes.HAGun + "x3 (Tenryuu)";
+					return ConstantsRes.HAGun + " x3 (Tenryuu)";
 				case 31:
-					return ConstantsRes.HAGun + "x2 (Tenryuu)";
+					return ConstantsRes.HAGun + " x2 (Tenryuu)";
 				case 32:
-					return "Rocket Launcherx2 or FCR/Pom-pom Gun or Rocket Launcher/Pom-pom Gun (UK)";
+					return "Rocket Launcher x2 or FCR/Pom-pom Gun or Rocket Launcher/Pom-pom Gun (UK)";
 				case 33:
 					return ConstantsRes.HAGun + "/" + ConstantsRes.AAGun + " (Unconcentrated) (Gotland)";
+				case 34:
+					return "5inch Single Gun Mk.30 Kai + GFCS x2 (Johnston)";
+				case 35:
+					return "5inch Single Gun Mk.30 Kai x2 or + GFCS (Johnston)";
+				case 36:
+					return "5inch Single Gun Mk.30 Kai x2/GFCS (Johnston)";
+				case 37:
+					return "5inch Single Gun Mk.30 Kai x2 (Johnston)";
 				default:
 					return ConstantsRes.Unknown;
 			}

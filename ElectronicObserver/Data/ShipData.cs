@@ -1518,12 +1518,20 @@ namespace ElectronicObserver.Data
 				if (!CanAttackSubmarine)
 					return false;
 
-				if (ShipID == 141 || ShipID == 394 || ShipID == 478 || ShipID == 681)  // 五十鈴改二, Jervis改, 龍田改二, Samuel B.Roberts改
-					return true;
+				switch (ShipID)
+				{
+					case 141:		// 五十鈴改二
+					case 394:		// Jervis改
+					case 478:		// 龍田改二
+					case 681:       // Samuel B.Roberts改
+					case 562:		// Johnston
+					case 689:       // Johnston改
+						return true;
+				}
 
 				var eqs = AllSlotInstance.Where(eq => eq != null);
 
-				if (ShipID == 380 || ShipID == 529)  // 大鷹改(二)
+				if (ShipID == 380 || ShipID == 529 || ShipID == 381 || ShipID == 536)  // 大鷹改(二) Shinyo Kai (2)
 				{
 					// 本当は 対潜 > 0 の艦攻 or オートジャイロ or 対潜哨戒機 が必要らしいが、おそらくそれは CanAttackSubmarine で判定済みなので
 					return true;

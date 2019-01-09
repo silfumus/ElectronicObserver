@@ -1231,7 +1231,36 @@ namespace ElectronicObserver.Window
 		}
 
 
-		private void ContextMenuFleet_AntiAirDetails_Click(object sender, EventArgs e)
+        /// <summary>
+		/// 
+		/// <see cref="https://kancolle-fleetanalysis.firebaseapp.com"/>
+		/// </summary>
+		private void ContextMenuFleet_CopyFleetAnalysis_Click(object sender, EventArgs e)
+        {
+
+            StringBuilder sb = new StringBuilder();
+            KCDatabase db = KCDatabase.Instance;
+
+            // 手書き json の悲しみ
+            // pain and suffering
+
+            sb.Append("[");
+
+            foreach (var ship in db.Ships.Values.Where(s => s.IsLocked))
+            {
+                if (ship == null) break;
+
+				sb.Append($"{{\"api_ship_id\":{ship.ShipID},\"api_lv\":{ship.Level},\"api_kyouka\":[{ship.FirepowerModernized},{ship.TorpedoModernized},{ship.AAModernized},{ship.ArmorModernized},{ship.LuckModernized},{ship.HPMaxModernized},{ship.ASWModernized}],\"api_sally_area\":{ship.SallyArea}}},");
+			}
+
+            sb.Remove(sb.Length - 1, 1);        // remove ","
+            sb.Append("]");
+
+            Clipboard.SetData(DataFormats.StringFormat, sb.ToString());
+        }
+
+
+        private void ContextMenuFleet_AntiAirDetails_Click(object sender, EventArgs e)
 		{
 
 			var dialog = new DialogAntiAirDefense();
