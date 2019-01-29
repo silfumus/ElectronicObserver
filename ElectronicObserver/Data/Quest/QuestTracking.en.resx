@@ -132,23 +132,11 @@
   <data name="SRank" xml:space="preserve">
     <value>S-ranks</value>
   </data>
-  <data name="Only" xml:space="preserve">
-    <value> only</value>
-  </data>
   <data name="Supply" xml:space="preserve">
     <value>Resupply ×</value>
   </data>
-  <data name="Victory" xml:space="preserve">
-    <value>victories ×</value>
-  </data>
   <data name="Sunk" xml:space="preserve">
     <value> sunk × </value>
-  </data>
-  <data name="Encounter" xml:space="preserve">
-    <value>encounter</value>
-  </data>
-  <data name="RankVictory" xml:space="preserve">
-    <value>-rank victories ×</value>
   </data>
   <data name="Construction" xml:space="preserve">
     <value>Construction ×</value>
@@ -158,12 +146,6 @@
   </data>
   <data name="Dismantlement" xml:space="preserve">
     <value>Dismantle ship ×</value>
-  </data>
-  <data name="Exercise" xml:space="preserve">
-    <value>Exercise </value>
-  </data>
-  <data name="Expedition" xml:space="preserve">
-    <value>Expedition ×</value>
   </data>
   <data name="Improvement" xml:space="preserve">
     <value>Improvement ×</value>

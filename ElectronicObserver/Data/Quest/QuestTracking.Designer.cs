@@ -19,7 +19,7 @@ namespace ElectronicObserver.Data.Quest {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class QuestTracking {
@@ -124,33 +124,6 @@ namespace ElectronicObserver.Data.Quest {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 戦闘.
-        /// </summary>
-        internal static string Encounter {
-            get {
-                return ResourceManager.GetString("Encounter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 演習.
-        /// </summary>
-        internal static string Exercise {
-            get {
-                return ResourceManager.GetString("Exercise", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 遠征.
-        /// </summary>
-        internal static string Expedition {
-            get {
-                return ResourceManager.GetString("Expedition", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to 装備改修.
         /// </summary>
         internal static string Improvement {
@@ -183,24 +156,6 @@ namespace ElectronicObserver.Data.Quest {
         internal static string NumberOfTimes {
             get {
                 return ResourceManager.GetString("NumberOfTimes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 以上.
-        /// </summary>
-        internal static string Only {
-            get {
-                return ResourceManager.GetString("Only", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 勝利.
-        /// </summary>
-        internal static string RankVictory {
-            get {
-                return ResourceManager.GetString("RankVictory", resourceCulture);
             }
         }
         
@@ -246,15 +201,6 @@ namespace ElectronicObserver.Data.Quest {
         internal static string Supply {
             get {
                 return ResourceManager.GetString("Supply", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 勝利.
-        /// </summary>
-        internal static string Victory {
-            get {
-                return ResourceManager.GetString("Victory", resourceCulture);
             }
         }
     }

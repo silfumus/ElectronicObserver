@@ -29,14 +29,23 @@ namespace ElectronicObserver.Data.Quest
 		[DataMember]
 		private HashSet<int> Categories { get; set; }
 
+		/// <summary>
+		/// Categories の扱い
+		/// -1=装備ID, 1=図鑑分類, 2=通常の装備カテゴリ, 3=アイコン
+		/// </summary>
+		[DataMember]
+		protected int CategoryIndex { get; set; }
 
 
 		public ProgressDiscard(QuestData quest, int maxCount, bool countsAmount, int[] categories)
+			: this(quest, maxCount, countsAmount, categories, 2) { }
+
+		public ProgressDiscard(QuestData quest, int maxCount, bool countsAmount, int[] categories, int categoryIndex)
 			: base(quest, maxCount)
 		{
-
 			CountsAmount = countsAmount;
 			Categories = categories == null ? null : new HashSet<int>(categories);
+			CategoryIndex = categoryIndex;
 		}
 
 
@@ -59,15 +68,60 @@ namespace ElectronicObserver.Data.Quest
 			{
 				var eq = KCDatabase.Instance.Equipments[i];
 
-				if (Categories.Contains((int)eq.MasterEquipment.CategoryType))
-					Increment();
+				switch (CategoryIndex)
+				{
+					case -1:
+						if (Categories.Contains(eq.EquipmentID))
+							Increment();
+						break;
+					case 1:
+						if (Categories.Contains(eq.MasterEquipment.CardType))
+							Increment();
+						break;
+					case 2:
+						if (Categories.Contains((int)eq.MasterEquipment.CategoryType))
+							Increment();
+						break;
+					case 3:
+						if (Categories.Contains(eq.MasterEquipment.IconType))
+							Increment();
+						break;
+				}
+
 			}
 		}
 
 
 
-		public override string GetClearCondition() {
-			return ( Categories == null ? "" : string.Join( "・", Categories.OrderBy( s => s ).Select( s => Window.FormMain.Instance.Translator.GetTranslation(KCDatabase.Instance.EquipmentTypes[s].Name, Utility.TranslationType.EquipmentType)) ) ) + QuestTracking.Discard + ProgressMax + ( CountsAmount ? QuestTracking.NumberOfPieces : QuestTracking.NumberOfTimes );
+		public override string GetClearCondition()
+		{
+			return (Categories == null ? "" : string.Join("・", Categories.OrderBy(s => s).Select(s =>
+			{
+				switch (CategoryIndex)
+				{
+					case -1:
+						return Window.FormMain.Instance.Translator.GetTranslation(KCDatabase.Instance.MasterEquipments[s].Name, Utility.TranslationType.Equipment);
+					case 1:
+						return $"Illust[{s}]";
+					case 2:
+						return Window.FormMain.Instance.Translator.GetTranslation(KCDatabase.Instance.EquipmentTypes[s].Name, Utility.TranslationType.EquipmentType);
+					case 3:
+						return $"Icon[{s}]";
+					default:
+						return $"???[{s}]";
+				}
+			}))) + " scrap ×" + ProgressMax + (CountsAmount ? "pcs" : "times");
+		}
+
+
+
+		/// <summary>
+		/// 互換性維持：デフォルト値の設定
+		/// </summary>
+		[OnDeserializing]
+		private void OnDeserializing(StreamingContext context)
+		{
+			CategoryIndex = 2;
 		}
 
 	}

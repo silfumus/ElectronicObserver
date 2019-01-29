@@ -59,6 +59,7 @@
 			this.UI_JapaneseEquipmentNames = new System.Windows.Forms.CheckBox();
 			this.UI_JapaneseShipTypes = new System.Windows.Forms.CheckBox();
 			this.UI_JapaneseShipNames = new System.Windows.Forms.CheckBox();
+			this.UI_NodeNumbering = new System.Windows.Forms.CheckBox();
 
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.UI_RenderingTestChanger = new System.Windows.Forms.TrackBar();
@@ -577,6 +578,7 @@
 			this.tabPage2.Controls.Add(this.UI_JapaneseEquipmentNames);
 			this.tabPage2.Controls.Add(this.UI_JapaneseShipTypes);
 			this.tabPage2.Controls.Add(this.UI_JapaneseShipNames);
+			this.tabPage2.Controls.Add(this.UI_NodeNumbering);
 			this.tabPage2.Controls.Add(this.label21);
 			this.tabPage2.Controls.Add(this.comboBox1);
 
@@ -636,6 +638,16 @@
 			this.UI_JapaneseShipNames.TabIndex = 12;
 			this.UI_JapaneseShipNames.Text = "Use JP ship names";
 			this.UI_JapaneseShipNames.UseVisualStyleBackColor = true;
+			//
+			// UI_NodeNumbering
+			//
+			this.UI_NodeNumbering.AutoSize = true;
+			this.UI_NodeNumbering.Location = new System.Drawing.Point(9, 179);
+			this.UI_NodeNumbering.Name = "UI_JapaneseShipTypes";
+			this.UI_NodeNumbering.Size = new System.Drawing.Size(168, 19);
+			this.UI_NodeNumbering.TabIndex = 13;
+			this.UI_NodeNumbering.Text = "Use letter for node assignment";
+			this.UI_NodeNumbering.UseVisualStyleBackColor = true;
 			//
 			// tableLayoutPanel1
 			//
@@ -1416,7 +1428,7 @@
 			this.FormFleet_ShowConditionIcon.Name = "FormFleet_ShowConditionIcon";
 			this.FormFleet_ShowConditionIcon.Size = new System.Drawing.Size(139, 19);
 			this.FormFleet_ShowConditionIcon.TabIndex = 13;
-			this.FormFleet_ShowConditionIcon.Text = "Fatigue Icon";
+			this.FormFleet_ShowConditionIcon.Text = "Fatigue icon";
 			this.ToolTipInfo.SetToolTip(this.FormFleet_ShowConditionIcon, "Show fatigue level icon in the fleet window.\r\nIf disabled, ship fatigue level is denoted by background color.");
 			this.FormFleet_ShowConditionIcon.UseVisualStyleBackColor = true;
 			//
@@ -2856,17 +2868,17 @@
 			// label21
 			//
 			this.label21.AutoSize = true;
-			this.label21.Location = new System.Drawing.Point(8, 197);
+			this.label21.Location = new System.Drawing.Point(8, 222);
 			this.label21.Name = "label21";
 			this.label21.Size = new System.Drawing.Size(57, 15);
 			this.label21.TabIndex = 16;
-			this.label21.Text = "Theme: ";
+			this.label21.Text = "Theme:";
 			//
 			// comboBox1
 			//
 			this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBox1.FormattingEnabled = true;
-			this.comboBox1.Location = new System.Drawing.Point(71, 194);
+			this.comboBox1.Location = new System.Drawing.Point(71, 222);
 			this.comboBox1.Name = "comboBox1";
 			this.comboBox1.Size = new System.Drawing.Size(80, 23);
 			this.comboBox1.TabIndex = 17;
@@ -3159,6 +3171,7 @@
 		private System.Windows.Forms.CheckBox UI_JapaneseEquipmentTypes;
 		private System.Windows.Forms.CheckBox UI_JapaneseEquipmentNames;
 		private System.Windows.Forms.CheckBox UI_JapaneseShipTypes;
+		private System.Windows.Forms.CheckBox UI_NodeNumbering;
 		private System.Windows.Forms.CheckBox FormFleet_ShowAircraftLevelByNumber;
 		private System.Windows.Forms.CheckBox FormCompass_IsScrollable;
 		private System.Windows.Forms.Label label37;

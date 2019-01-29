@@ -41,7 +41,7 @@ namespace ElectronicObserver.Data.Quest
 
 
 		public override string GetClearCondition() {
-			return QuestTracking.Exercise + ( WinOnly ? QuestTracking.Victory : " ×") + ProgressMax;
+			return "Exercise " + ( WinOnly ? "victories ×" : "×") + ProgressMax;
 		}
 	}
 }

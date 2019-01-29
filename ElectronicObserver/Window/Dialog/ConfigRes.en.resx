@@ -630,4 +630,7 @@ More details, as well as an access key, can be found on the site below. (opens y
   <data name="NewFormula33" xml:space="preserve">
     <value>New Formula 33</value>
   </data>
+  <data name="FleetBlinkAtCompletion" xml:space="preserve">
+    <value>Blink at timer completion</value>
+  </data>
 </root>

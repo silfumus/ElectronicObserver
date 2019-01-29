@@ -167,6 +167,8 @@
 			this.LevelTimer = new System.Windows.Forms.Timer(this.components);
 			this.SaveCSVDialog = new System.Windows.Forms.SaveFileDialog();
 			this.ImageLoader = new System.ComponentModel.BackgroundWorker();
+			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+			this.StripMenu_Edit_CopySpecialEquipmentTable = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -230,7 +232,9 @@
             this.StripMenu_Edit_CopyShipName,
             this.StripMenu_Edit_CopyShipData,
             this.toolStripSeparator2,
-            this.StripMenu_Edit_GoogleShipName});
+            this.StripMenu_Edit_GoogleShipName,
+            this.toolStripSeparator3,
+            this.StripMenu_Edit_CopySpecialEquipmentTable});
 			this.StripMenu_Edit.Name = "StripMenu_Edit";
 			this.StripMenu_Edit.Size = new System.Drawing.Size(60, 20);
 			this.StripMenu_Edit.Text = EncycloRes.StripMenu_Edit;
@@ -239,7 +243,7 @@
 			//
 			this.StripMenu_Edit_EditParameter.Name = "StripMenu_Edit_EditParameter";
 			this.StripMenu_Edit_EditParameter.Size = new System.Drawing.Size(250, 22);
-			this.StripMenu_Edit_EditParameter.Text = "Edit parameter...";
+			this.StripMenu_Edit_EditParameter.Text = "Edit Parameter...";
 			this.StripMenu_Edit_EditParameter.Click += new System.EventHandler(this.StripMenu_Edit_EditParameter_Click);
 			//
 			// toolStripSeparator1
@@ -253,7 +257,7 @@
 			this.StripMenu_Edit_CopyShipName.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
             | System.Windows.Forms.Keys.C)));
 			this.StripMenu_Edit_CopyShipName.Size = new System.Drawing.Size(250, 22);
-			this.StripMenu_Edit_CopyShipName.Text = "Copy ship &name";
+			this.StripMenu_Edit_CopyShipName.Text = "Copy Ship &Name";
 			this.StripMenu_Edit_CopyShipName.Click += new System.EventHandler(this.StripMenu_Edit_CopyShipName_Click);
 			//
 			// StripMenu_Edit_CopyShipData
@@ -261,7 +265,7 @@
 			this.StripMenu_Edit_CopyShipData.Name = "StripMenu_Edit_CopyShipData";
 			this.StripMenu_Edit_CopyShipData.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
 			this.StripMenu_Edit_CopyShipData.Size = new System.Drawing.Size(250, 22);
-			this.StripMenu_Edit_CopyShipData.Text = "Copy ship &data";
+			this.StripMenu_Edit_CopyShipData.Text = "Copy Ship &Data";
 			this.StripMenu_Edit_CopyShipData.Click += new System.EventHandler(this.StripMenu_Edit_CopyShipData_Click);
 			//
 			// toolStripSeparator2
@@ -291,14 +295,14 @@
 			this.StripMenu_View_ShowAppearingArea.Name = "StripMenu_View_ShowAppearingArea";
 			this.StripMenu_View_ShowAppearingArea.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
 			this.StripMenu_View_ShowAppearingArea.Size = new System.Drawing.Size(217, 22);
-			this.StripMenu_View_ShowAppearingArea.Text = "Map dro&p";
+			this.StripMenu_View_ShowAppearingArea.Text = "Map Dro&p";
 			this.StripMenu_View_ShowAppearingArea.Click += new System.EventHandler(this.StripMenu_View_ShowAppearingArea_Click);
 			//
 			// StripMenu_View_ShowShipGraphicViewer
 			//
 			this.StripMenu_View_ShowShipGraphicViewer.Name = "StripMenu_View_ShowShipGraphicViewer";
 			this.StripMenu_View_ShowShipGraphicViewer.Size = new System.Drawing.Size(217, 22);
-			this.StripMenu_View_ShowShipGraphicViewer.Text = "Ship image &viewer";
+			this.StripMenu_View_ShowShipGraphicViewer.Text = "Ship Image &Viewer";
 			this.StripMenu_View_ShowShipGraphicViewer.Click += new System.EventHandler(this.StripMenu_View_ShowShipGraphicViewer_Click);
 			//
 			// splitContainer1
@@ -1795,6 +1799,18 @@
 			this.ImageLoader.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ImageLoader_DoWork);
 			this.ImageLoader.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.ImageLoader_RunWorkerCompleted);
 			//
+			// toolStripSeparator3
+			//
+			this.toolStripSeparator3.Name = "toolStripSeparator3";
+			this.toolStripSeparator3.Size = new System.Drawing.Size(247, 6);
+			//
+			// StripMenu_Edit_CopySpecialEquipmentTable
+			//
+			this.StripMenu_Edit_CopySpecialEquipmentTable.Name = "StripMenu_Edit_CopySpecialEquipmentTable";
+			this.StripMenu_Edit_CopySpecialEquipmentTable.Size = new System.Drawing.Size(250, 22);
+			this.StripMenu_Edit_CopySpecialEquipmentTable.Text = "Copy &Special Equipment Table";
+			this.StripMenu_Edit_CopySpecialEquipmentTable.Click += new System.EventHandler(this.StripMenu_Edit_CopySpecialEquipmentTable_Click);
+			//
 			// DialogAlbumMasterShip
 			//
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1981,5 +1997,7 @@
 		private System.Windows.Forms.ToolStripMenuItem StripMenu_View_ShowShipGraphicViewer;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 		private System.Windows.Forms.ToolStripMenuItem StripMenu_Edit_GoogleShipName;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+		private System.Windows.Forms.ToolStripMenuItem StripMenu_Edit_CopySpecialEquipmentTable;
 	}
 }

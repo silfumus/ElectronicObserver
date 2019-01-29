@@ -89,7 +89,7 @@ namespace ElectronicObserver.Data
 				case 2:
 					sb.Append(KCDatabase.Instance.MasterShips[ShipID].Name + ", at " + CompletionTime.ToString()); break;
 				case 3:
-					sb.Append(KCDatabase.Instance.MasterShips[ShipID].Name + ", Completed!"); break;
+					sb.Append(KCDatabase.Instance.MasterShips[ShipID].Name + ", Complete!"); break;
 			}
 
 			return sb.ToString();

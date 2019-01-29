@@ -9,6 +9,8 @@ namespace ElectronicObserver.Data.Quest
 {
 
 	[DataContract(Name = "ProgressMultiBattle")]
+	[KnownType(typeof(ProgressBattle))]
+	[KnownType(typeof(ProgressSpecialBattle))]
 	public class ProgressMultiBattle : ProgressData
 	{
 
@@ -54,12 +56,12 @@ namespace ElectronicObserver.Data.Quest
 			if (ProgressList.All(p => p.IsCleared))
 				return "Complete!";
 			else
-				return string.Join(", ", ProgressList.Where(p => !p.IsCleared).Select(p => p.GetClearCondition() + ": " + p.ToString()));
+				return string.Join(" \n", ProgressList.Where(p => !p.IsCleared).Select(p => p.ToString() + " " + p.GetClearCondition()));
 		}
 
 		public override string GetClearCondition()
 		{
-			return string.Join(", ", ProgressList.Select(p => p.GetClearCondition()));
+			return string.Join("\n", ProgressList.Select(p => p.GetClearCondition()));
 		}
 	}
 }

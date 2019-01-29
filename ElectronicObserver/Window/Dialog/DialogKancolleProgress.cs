@@ -85,7 +85,7 @@ namespace ElectronicObserver.Window.Dialog
         private void GenerateList()
         {
             var Ships = KCDatabase.Instance.MasterShips.Values;
-            Ships = Ships.Where(x => x.ShipID < 1500 && x.RemodelBeforeShipID == 0).OrderBy(x => x.SortNo);
+            Ships = Ships.Where(x => x.ShipID < 1500 && x.RemodelBeforeShipID == 0).OrderBy(x => x.SortID);
 
             var Destroyer = Ships.Where(x => x.ShipType == ShipTypes.Destroyer);
             var Escort = Ships.Where(x => x.ShipType == ShipTypes.Escort);
