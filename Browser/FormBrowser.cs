@@ -246,6 +246,7 @@ namespace Browser
 				settings.DisableGpuAcceleration();
 
 			settings.CefCommandLineArgs.Add("proxy-server", ProxySettings);
+			settings.CefCommandLineArges.Add("limit-fps", "60");// limit browser fps to fix canvas crash
 			if (Configuration.ForceColorProfile)
 				settings.CefCommandLineArgs.Add("force-color-profile", "srgb");
 			CefSharpSettings.SubprocessExitIfParentProcessClosed = true;
