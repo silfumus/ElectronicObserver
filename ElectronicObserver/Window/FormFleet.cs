@@ -1246,12 +1246,43 @@ namespace ElectronicObserver.Window
 
             sb.Append("[");
 
-            foreach (var ship in db.Ships.Values.Where(s => s.IsLocked))
+            foreach (ShipData ship in db.Ships.Values.Where(s => s.IsLocked))
             {
                 if (ship == null) break;
 
-				sb.Append($"{{\"api_ship_id\":{ship.ShipID},\"api_lv\":{ship.Level},\"api_kyouka\":[{ship.FirepowerModernized},{ship.TorpedoModernized},{ship.AAModernized},{ship.ArmorModernized},{ship.LuckModernized},{ship.HPMaxModernized},{ship.ASWModernized}],\"api_sally_area\":{ship.SallyArea}}},");
+                // ship.SallyArea defaults to -1 if it doesn't exist on api 
+                // which breaks the app, changing the default to 0 would be 
+                // easier but I'd prefer not to mess with that
+				sb.Append($"{{\"api_ship_id\":{ship.ShipID},\"api_lv\":{ship.Level},\"api_kyouka\":[{ship.FirepowerModernized},{ship.TorpedoModernized},{ship.AAModernized},{ship.ArmorModernized},{ship.LuckModernized},{ship.HPMaxModernized},{ship.ASWModernized}],\"api_sally_area\":{(ship.SallyArea >= 0 ? ship.SallyArea : 0 )}}},");
 			}
+
+            sb.Remove(sb.Length - 1, 1);        // remove ","
+            sb.Append("]");
+
+            Clipboard.SetData(DataFormats.StringFormat, sb.ToString());
+        }
+
+        /// <summary>
+		/// 
+		/// <see cref="https://kancolle-fleetanalysis.firebaseapp.com"/>
+		/// </summary>
+		private void ContextMenuFleet_CopyFleetAnalysisEquip_Click(object sender, EventArgs e)
+        {
+
+            StringBuilder sb = new StringBuilder();
+            KCDatabase db = KCDatabase.Instance;
+
+            // 手書き json の悲しみ
+            // pain and suffering
+
+            sb.Append("[");
+
+            foreach (EquipmentData equip in db.Equipments.Values.Where(eq => eq.IsLocked))
+            {
+                if (equip == null) break;
+
+                sb.Append($"{{\"api_slotitem_id\":{equip.EquipmentID},\"api_level\":{equip.Level}}},");
+            }
 
             sb.Remove(sb.Length - 1, 1);        // remove ","
             sb.Append("]");
