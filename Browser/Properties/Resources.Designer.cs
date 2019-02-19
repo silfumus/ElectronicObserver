@@ -248,7 +248,7 @@ namespace Browser.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to document.cookie = &apos;ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=osapi.dmm.com;path=/&apos;; document.cookie = &apos;ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=203.104.209.7;path=/&apos;; document.cookie = &apos;ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=www.dmm.com;path=/netgame/&apos;; document.cookie = &apos;ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=log-netgame.dmm.com;path=/&apos;;.
+        ///   Looks up a localized string similar to document.cookie=&apos;ckcy=1;expires=Thu, 31 Dec 2020 23:59:59 GMT;path=/netgame;domain=.dmm.com&apos;.
         /// </summary>
         internal static string RegionCookie {
             get {

@@ -226,7 +226,7 @@ catch(e) {
 if (node) document.getElementsByTagName('head')[0].removeChild(node);</value>
   </data>
   <data name="RegionCookie" xml:space="preserve">
-    <value>document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=osapi.dmm.com;path=/'; document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=203.104.209.7;path=/'; document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=www.dmm.com;path=/netgame/'; document.cookie = 'ckcy=1;expires=Sun, 09 Feb 2019 09:00:09 GMT;domain=log-netgame.dmm.com;path=/';</value>
+    <value>document.cookie='ckcy=1;expires=Thu, 31 Dec 2020 23:59:59 GMT;path=/netgame;domain=.dmm.com'</value>
   </data>
   <data name="RemoveWelcomePopup" xml:space="preserve">
     <value>var element = document.getElementById('welcome'); element.parentNode.removeChild(element);</value>
